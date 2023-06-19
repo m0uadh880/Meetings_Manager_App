@@ -33,7 +33,7 @@
 
         <Style x:Key="menuButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="#a5b4fc" />
+            <Setter Property="Foreground" Value="#ea580c" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="Height" Value="35" />
             <Setter Property="Margin" Value="15 3" />
@@ -50,7 +50,7 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#a5b4fc" />
+                    <Setter Property="Background" Value="#f97316" />
                     <Setter Property="Foreground" Value="#ffffff" />
                 </Trigger>
             </Style.Triggers>
@@ -66,7 +66,7 @@
         
 
         <Style x:Key="addButton" TargetType="Button">
-            <Setter Property="Background" Value="#22c55e" />
+            <Setter Property="Background" Value="#ea580c" />
             <Setter Property="Foreground" Value="#ffffff" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="Height" Value="35" />
@@ -87,7 +87,7 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#86efac" />
+                    <Setter Property="Background" Value="#f97316" />
                     <Setter Property="Foreground" Value="#ffffff" />
                 </Trigger>
             </Style.Triggers>
@@ -129,11 +129,11 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#a5b4fc"/>
+                    <Setter Property="Background" Value="#fdba74"/>
                     <Setter Property="Foreground" Value="#ffffff"/>
                 </Trigger>
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#a5b4fc"/>
+                    <Setter Property="Background" Value="#fdba74"/>
                     <Setter Property="Foreground" Value="#ffffff"/>
                 </Trigger>
                 <MultiTrigger>
@@ -263,8 +263,8 @@
 
        
         <Style x:Key="gridEditButton" TargetType="Button">
-            <Setter Property="Background" Value="#512DA8" />
-            <Setter Property="BorderBrush" Value="#4A148C" />
+            <Setter Property="Background" Value="#fbbf24" />
+            <Setter Property="BorderBrush" Value="#fcd34d" />
             <Setter Property="Foreground" Value="#ffffff" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -279,7 +279,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#673AB7" />
+                    <Setter Property="Background" Value="#fde68a" />
                 </Trigger>
             </Style.Triggers>
         </Style>
