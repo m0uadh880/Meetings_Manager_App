@@ -1,32 +1,35 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Navigation;
-
 using System.Windows.Media;
-
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace Meetings_Manager_App
 {
-  
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Interaction logic for AddMeetingWindow.xaml
+    /// </summary>
+    public partial class AddMeetingWindow : Window
     {
-        public MainWindow()
+
+        public AddMeetingWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
-
-            ObservableCollection<Meeting> meetings = new ObservableCollection<Meeting>();
-
-            
-            MeetingsDataGrid.ItemsSource = meetings;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Maximized;
         }
-
         private bool IsMaximize = false;
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -57,23 +60,12 @@ namespace Meetings_Manager_App
             }
         }
 
-        private void AddNewMeeeting_Click(object sender, RoutedEventArgs e)
+        private void MeetingsButton_Click(object sender, RoutedEventArgs e)
         {
-            AddMeetingWindow addMeetingWindow = new AddMeetingWindow();
-            
-            addMeetingWindow.Show();
-            Close();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+
+            this.Close();
         }
-    }
-
-    public class Meeting
-    {
-        public string Number { get; set; }
-        public string ProjectName { get; set; }
-        public string DateAndTime { get; set; }
-        public string Duration { get; set; }
-        public string Guests { get; set; }
-        public string Description { get; set; }
-
     }
 }
