@@ -46,7 +46,7 @@
                         <Grid>
                             <TextBlock Margin="35 0 5 0" VerticalAlignment="Center" Foreground="#bdbdbd"
                                        Panel.ZIndex="1" IsHitTestVisible="False" Text="Enter Email"
-                                   Visibility="{Binding ElementName=EmailtextBox, Converter={StaticResource BoolToVis}}" />
+                                    />
                             
                             <TextBox x:Name="EmailtextBox" FontSize="13" Padding="31 9 0 9" Margin="0 5" />
 
@@ -58,7 +58,7 @@
                         <Grid>
                             <TextBlock Margin="35 0 5 0" VerticalAlignment="Center" Foreground="#bdbdbd"
                                        Panel.ZIndex="1" IsHitTestVisible="False" Text="Enter Password"
-                                   Visibility="{Binding ElementName=PasswordtextBox, Converter={StaticResource BoolToVis}}" />
+                                   />
 
                             <TextBox x:Name="PasswordtextBox" FontSize="13" Padding="31 9 0 9" Margin="0 5" />
 
