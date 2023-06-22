@@ -67,5 +67,12 @@ namespace Meetings_Manager_App
 
             this.Close();
         }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            LogInWindow logInWindow = new LogInWindow();    
+            logInWindow.Show();
+            this.Close();
+        }
     }
 }

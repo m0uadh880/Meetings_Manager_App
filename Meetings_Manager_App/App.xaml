@@ -377,6 +377,7 @@
             <Setter Property="FontSize" Value="20" />
             <Setter Property="Padding" Value="10 8" />
             <Setter Property="VerticalAlignment" Value="Center" />
+            
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBoxBase}">
@@ -397,6 +398,38 @@
             </Setter>
         </Style>
 
+        <Style x:Key="SignInButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#5a5a5a" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Template" >
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#688E9B" />
+                    <Setter Property="Foreground" Value="#ffffff" />
+                    <Setter Property="BorderBrush" Value="#688E9B" />
+                </Trigger>
+            </Style.Triggers>
+            
+        </Style>
+
+        <Style x:Key="MainButtonLong" TargetType="Button" BasedOn="{StaticResource SignInButton}">
+            <Setter Property="Background" Value="#ffffff" />
+            <Setter Property="Foreground" Value="#688E9B" />
+            <Setter Property="BorderBrush" Value="#688E9B" />
+        </Style>
 
 
     </Application.Resources>
