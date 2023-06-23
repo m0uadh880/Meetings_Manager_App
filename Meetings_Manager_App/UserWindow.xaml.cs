@@ -1,17 +1,23 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Navigation;
-
 using System.Windows.Media;
-
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace Meetings_Manager_App
 {
-  
-    public partial class MainWindow : Window
+    
+    public partial class UserWindow : Window
     {
-        public MainWindow()
+        public UserWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
@@ -51,15 +57,6 @@ namespace Meetings_Manager_App
                 this.DragMove();
             }
         }
-
-        private void AddNewMeeeting_Click(object sender, RoutedEventArgs e)
-        {
-            AddMeetingWindow addMeetingWindow = new AddMeetingWindow();
-            
-            addMeetingWindow.Show();
-            Close();
-        }
-
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             LogInWindow logInWindow = new LogInWindow();
@@ -68,4 +65,14 @@ namespace Meetings_Manager_App
         }
     }
 
+    public class Meeting
+    {
+        public string Number { get; set; }
+        public string AdminName { get; set; }
+        public string DateAndTime { get; set; }
+        public string Duration { get; set; }
+        public string Guests { get; set; }
+        public string Description { get; set; }
+
+    }
 }

@@ -26,3 +26,5 @@ C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debu
 C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\MainWindow.baml
 C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\LogInWindow.g.cs
 C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\LogInWindow.baml
+C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\UserWindow.g.cs
+C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\UserWindow.baml
