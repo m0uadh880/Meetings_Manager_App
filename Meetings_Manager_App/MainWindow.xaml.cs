@@ -1,10 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
-
-using System.Windows.Media;
-
+using System.Windows.Forms;
 
 namespace Meetings_Manager_App
 {
@@ -62,9 +59,15 @@ namespace Meetings_Manager_App
 
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
-            LogInWindow logInWindow = new LogInWindow();
-            logInWindow.Show();
-            Close();
+            DialogResult result = System.Windows.Forms.MessageBox.Show("Are you sure ?", "Confirmation", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                LogInWindow logInWindow = new LogInWindow();
+                logInWindow.Show();
+                Close();
+            }
         }
     }
 

@@ -39,5 +39,12 @@ namespace Meetings_Manager_App
             mainWindow.Show();
             Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            UserWindow userWindow = new UserWindow();
+            userWindow.Show();
+            Close();
+        }
     }
 }
