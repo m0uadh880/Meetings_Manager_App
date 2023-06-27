@@ -132,7 +132,7 @@
                             <TextBlock  Margin="13 0" VerticalAlignment="Center" Foreground="#868686" IsHitTestVisible="False" Panel.ZIndex="1"
                                    Text="Enter the project name" FontSize="14" 
                                    Visibility="{Binding ElementName=ProjectNametextBox,  Converter={StaticResource BoolToVis}}" />
-                            <TextBox Name="ProjectNametextBox"/>
+                            <TextBox x:Name="ProjectNametextBox"/>
                         </Grid>
                     </StackPanel>
 
@@ -150,7 +150,7 @@
                             <TextBlock Grid.Column="1"  Margin="13 0" VerticalAlignment="Center" Foreground="#868686" IsHitTestVisible="False" Panel.ZIndex="1"
                                     FontSize="14" 
                                    Visibility="{Binding ElementName=DatetextBox, Converter={StaticResource BoolToVis}}" />
-                            <DatePicker  Text="Select a date" Grid.Column="1" Name="DatetextBox"/>
+                            <DatePicker  Text="Select a date" Grid.Column="1" x:Name="DatetextBox"/>
                         </Grid>
                     </StackPanel>
 
@@ -177,13 +177,13 @@
                                 <TextBlock Grid.Column="1"  Margin="13 0" VerticalAlignment="Center" Foreground="#868686" IsHitTestVisible="False" Panel.ZIndex="1"
                                     FontSize="14" Text="00:00 AM" 
                                    Visibility="{Binding ElementName=StartWithtextBox, Converter={StaticResource BoolToVis}}" />
-                                <TextBox  Grid.Column="1" Name="StartWithtextBox"/>
+                                <TextBox  Grid.Column="1" x:Name="StartWithtextBox"/>
                             </Grid>
                         </StackPanel>
 
-                        <!--End with-->
+                        <!--Duration-->
                         <StackPanel Grid.Column="1" Margin="10" Width="150" HorizontalAlignment="Left">
-                            <TextBlock Text="End with" Foreground="#97A5B4" FontSize="20" Margin="0 0 0 8"/>
+                            <TextBlock Text="Duration" Foreground="#97A5B4" FontSize="20" Margin="0 0 0 8"/>
                             <Grid >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="30"/>
@@ -192,9 +192,9 @@
 
                                 <Icon:PackIconMaterial Kind="Clock" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 <TextBlock Grid.Column="1"  Margin="13 0" VerticalAlignment="Center" Foreground="#868686" IsHitTestVisible="False" Panel.ZIndex="1"
-                                    FontSize="14" Text="End with" 
+                                    FontSize="14"  
                                    Visibility="{Binding ElementName=EndWithtextBox, Converter={StaticResource BoolToVis}}" />
-                                <TextBox  Grid.Column="1" Name="EndWithtextBox"/>
+                                <TextBox  Grid.Column="1" x:Name="DurationtextBox"/>
                             </Grid>
                         </StackPanel>
                     </Grid>
@@ -206,7 +206,7 @@
                             <TextBlock  Margin="13 0" VerticalAlignment="Center" Foreground="#868686" IsHitTestVisible="False" Panel.ZIndex="1"
                                    Text="Enter the guests" FontSize="14" 
                                    Visibility="{Binding ElementName=GueststextBox, Converter={StaticResource BoolToVis}}" />
-                            <TextBox Name="GueststextBox"/>
+                            <TextBox x:Name="GueststextBox"/>
                         </Grid>
                     </StackPanel>
 
@@ -217,7 +217,7 @@
                             <TextBlock  Margin="13 0" VerticalAlignment="Center" Foreground="#868686" IsHitTestVisible="False" Panel.ZIndex="1"
                                    Text="Enter a Description" FontSize="14" 
                                    Visibility="{Binding ElementName=DescriptiontextBox, Converter={StaticResource BoolToVis}}" />
-                            <TextBox Name="DescriptiontextBox" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                            <TextBox x:Name="DescriptiontextBox" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
                         </Grid>
                     </StackPanel>
 
@@ -228,7 +228,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Column="0" Content="Add Meeting" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource addButton}"></Button>
+                        <Button Click="AddMeetingButton_Click" Grid.Column="0" Content="Add Meeting" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource addButton}"></Button>
                     </Grid>
                 </Grid>
 

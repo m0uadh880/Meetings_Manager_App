@@ -8,10 +8,10 @@ using System.Windows;
 
 namespace Meetings_Manager_App
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        static string DatabaseName = "Meetings.db";
+        static string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public static string databasePath = System.IO.Path.Combine(folderPath, DatabaseName);
     }
 }

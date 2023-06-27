@@ -2,6 +2,9 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Forms;
+using SQLite;
+using System.Collections.Generic;
+using Meetings_Manager_App.Classes;
 
 namespace Meetings_Manager_App
 {
@@ -12,6 +15,8 @@ namespace Meetings_Manager_App
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+
+            ReadDataBase();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -20,6 +25,7 @@ namespace Meetings_Manager_App
         }
 
         private bool IsMaximize = false;
+
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -54,7 +60,9 @@ namespace Meetings_Manager_App
             AddMeetingWindow addMeetingWindow = new AddMeetingWindow();
             
             addMeetingWindow.Show();
+            ReadDataBase();
             Close();
+
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -69,6 +77,23 @@ namespace Meetings_Manager_App
                 Close();
             }
         }
+
+        void ReadDataBase()
+        {
+            List<Meetings> meetings;
+            using (SQLiteConnection conn = new SQLiteConnection(App.databasePath))
+            {
+                conn.CreateTable<Meetings>();
+                meetings = conn.Table<Meetings>().ToList();
+            }
+
+            if (meetings != null)
+            {
+                MeetingsDataGrid.ItemsSource = meetings;
+            }
+
+        }
+
     }
 
 }

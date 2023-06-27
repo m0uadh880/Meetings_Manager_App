@@ -30,6 +30,7 @@ namespace Meetings_Manager_App
         }
 
         private bool IsMaximize = false;
+
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -58,6 +59,7 @@ namespace Meetings_Manager_App
                 this.DragMove();
             }
         }
+
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             DialogResult result = System.Windows.Forms.MessageBox.Show("Are you sure ?", "Confirmation", System.Windows.Forms.MessageBoxButtons.YesNo);
@@ -71,14 +73,4 @@ namespace Meetings_Manager_App
         }
     }
 
-    public class Meeting
-    {
-        public string Number { get; set; }
-        public string AdminName { get; set; }
-        public string DateAndTime { get; set; }
-        public string Duration { get; set; }
-        public string Guests { get; set; }
-        public string Description { get; set; }
-
-    }
 }

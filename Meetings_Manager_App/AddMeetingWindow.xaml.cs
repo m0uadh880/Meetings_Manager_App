@@ -1,4 +1,6 @@
 ﻿
+using Meetings_Manager_App.Classes;
+using SQLite;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -69,6 +71,29 @@ namespace Meetings_Manager_App
                 logInWindow.Show();
                 this.Close();
             }
+        }
+
+        private void AddMeetingButton_Click(object sender, RoutedEventArgs e)
+        {
+            Meetings meeting = new Meetings()
+            {
+                ProjectName = ProjectNametextBox.Text,
+                Date = DatetextBox.Text,
+                Time = StartWithtextBox.Text,
+                Duration = DurationtextBox.Text,
+                Guests = GueststextBox.Text,
+                Description = DescriptiontextBox.Text,
+            };
+
+            using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
+            {
+                connection.CreateTable<Meetings>();
+                connection.Insert(meeting);
+            }
+
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
         }
     }
 }
