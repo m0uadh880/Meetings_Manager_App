@@ -5,16 +5,21 @@ using System.Windows.Forms;
 using SQLite;
 using System.Collections.Generic;
 using Meetings_Manager_App.Classes;
+using Meetings_Manager_App.Properties;
 
 namespace Meetings_Manager_App
 {
-  
+
     public partial class MainWindow : Window
     {
+
+        Meetings selectedMeeting = new Meetings();
+
         public MainWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+
 
             ReadDataBase();
         }
@@ -94,6 +99,40 @@ namespace Meetings_Manager_App
 
         }
 
+        private void MeetingsDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            selectedMeeting = (Meetings)MeetingsDataGrid.SelectedItem;
+            
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedMeeting != null)
+            {
+                AddMeetingWindow updateMeetingWindow = new AddMeetingWindow(selectedMeeting);
+                updateMeetingWindow.Show();
+                Close();
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult result = System.Windows.Forms.MessageBox.Show("Are you sure ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == System.Windows.Forms.DialogResult.Yes)
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(App.databasePath))
+                {
+                    conn.CreateTable<Meetings>();
+                    conn.Delete(selectedMeeting);
+                }
+                ReadDataBase();
+            }
+            
+        }
+
+
+        
     }
 
 }

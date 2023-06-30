@@ -228,7 +228,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Button Click="AddMeetingButton_Click" Grid.Column="0" Content="Add Meeting" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource addButton}"></Button>
+                        <Button x:Name="SaveButton" Click="AddMeetingButton_Click" Grid.Column="0" Content="Add Meeting" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource addButton}"></Button>
                     </Grid>
                 </Grid>
 
