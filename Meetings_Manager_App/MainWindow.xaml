@@ -117,9 +117,9 @@
                 <Separator Height="1" Grid.Row="3" Background="#1e1b4b" Margin="0 -1 0 10"/>
 
                 <!--Members Data Grid-->
-                <DataGrid SelectionChanged="MeetingsDataGrid_SelectionChanged"  Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="MeetingsDataGrid">
+                <DataGrid FontSize="15"  SelectionChanged="MeetingsDataGrid_SelectionChanged"  Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="MeetingsDataGrid">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>
+                        <!--<DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>-->
                         <DataGridTextColumn Header="Project Name" Binding="{Binding ProjectName}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="Date and Time" Binding="{Binding DateAndTime}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" IsReadOnly="True" Width="*"/>
