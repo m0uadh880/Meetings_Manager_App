@@ -337,22 +337,24 @@
 
         <Style x:Key="AddMeetingTextbox" TargetType="TextBox">
             <Setter Property="Background" Value="#ffffff" />
-            <Setter Property="Foreground" Value="#B0B9C6" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Height" Value="auto" />
+            <Setter Property="Width" Value="auto" />
             <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontSize" Value="20" />
             <Setter Property="Padding" Value="15 10" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="0 10" />
-            <!--<Setter Property="Effect" >
+            <Setter Property="Effect" >
                 <Setter.Value>
                     <DropShadowEffect BlurRadius="2" Opacity="0.1" ShadowDepth="1"/>
                 </Setter.Value>
-            </Setter>-->
+            </Setter>
 
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBoxBase}">
-                        <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" BorderThickness="1" BorderBrush="#E0E6ED" >
+                        <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" BorderThickness="1" BorderBrush="#E0E6ED" >
                             <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
                         </Border>
 

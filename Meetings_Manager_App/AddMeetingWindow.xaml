@@ -12,7 +12,7 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
 
-    <Border Background="#f9fafb" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+    <Border Background="#d6d3d1" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -21,15 +21,10 @@
 
             <!--Left Menu-->
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <Border Grid.Row="1" Background="#262626" CornerRadius="0 50 0 0">
+                <Border Background="#262626" >
                     <DockPanel>
                         <!--Menu Logo-->
-                        <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
+                        <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0 30 0 0">
                             <Ellipse>
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="/Images/AdminImage.jpg"/>
@@ -127,19 +122,19 @@
                     </Grid.RowDefinitions>
                     <!--Project Name-->
                     <StackPanel Grid.Row="0" Margin="20 10" Width="500" HorizontalAlignment="Left">
-                        <TextBlock Text="Project Name" Foreground="#97A5B4" FontSize="20" Margin="0 0 0 8"/>
+                        <TextBlock Text="Project Name"  FontSize="20" Margin="0 0 0 8"/>
                         <Grid >
-                            <TextBlock  Margin="13 0" VerticalAlignment="Center" Foreground="#868686" IsHitTestVisible="False" Panel.ZIndex="1"
+                            <TextBlock  Margin="13 0" VerticalAlignment="Center" Foreground="White" IsHitTestVisible="False" Panel.ZIndex="1"
                                    Text="Enter the project name" FontSize="14" 
                                    Visibility="{Binding ElementName=ProjectNametextBox,  Converter={StaticResource BoolToVis}}" />
-                            <TextBox x:Name="ProjectNametextBox"/>
+                            <TextBox x:Name="ProjectNametextBox" Style="{StaticResource AddMeetingTextbox}"/>
                         </Grid>
                     </StackPanel>
 
 
                     <!--Date-->
                     <StackPanel Grid.Row="1" Margin="20 10" Width="500" HorizontalAlignment="Left">
-                        <TextBlock Text="Select a day" Foreground="#97A5B4" FontSize="20" Margin="0 0 0 8"/>
+                        <TextBlock Text="Select a day" FontSize="20" Margin="0 0 0 8"/>
                         <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="30"/>
@@ -147,7 +142,7 @@
                             </Grid.ColumnDefinitions>
                             
                             <Icon:PackIconMaterial Kind="Calendar" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Column="1"  Margin="13 0" VerticalAlignment="Center" Foreground="#868686" IsHitTestVisible="False" Panel.ZIndex="1"
+                            <TextBlock Grid.Column="1"  Margin="13 0" VerticalAlignment="Center" Foreground="White" IsHitTestVisible="False" Panel.ZIndex="1"
                                     FontSize="14" 
                                    Visibility="{Binding ElementName=DatetextBox, Converter={StaticResource BoolToVis}}" />
                             <DatePicker  Text="Select a date" Grid.Column="1" x:Name="DatetextBox"/>
@@ -166,7 +161,7 @@
 
                         <!--Start with-->
                         <StackPanel Grid.Column="0" Margin="10" Width="150" HorizontalAlignment="Left">
-                            <TextBlock Text="Start with" Foreground="#97A5B4" FontSize="20" Margin="0 0 0 8"/>
+                            <TextBlock Text="Start with" FontSize="20" Margin="0 0 0 8"/>
                             <Grid >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="30"/>
@@ -177,13 +172,13 @@
                                 <TextBlock Grid.Column="1"  Margin="13 0" VerticalAlignment="Center" Foreground="#868686" IsHitTestVisible="False" Panel.ZIndex="1"
                                     FontSize="14" Text="00:00 AM" 
                                    Visibility="{Binding ElementName=StartWithtextBox, Converter={StaticResource BoolToVis}}" />
-                                <TextBox  Grid.Column="1" x:Name="StartWithtextBox"/>
+                                <TextBox  Grid.Column="1" x:Name="StartWithtextBox" Style="{StaticResource AddMeetingTextbox}"/>
                             </Grid>
                         </StackPanel>
 
                         <!--Duration-->
                         <StackPanel Grid.Column="1" Margin="10" Width="150" HorizontalAlignment="Left">
-                            <TextBlock Text="Duration" Foreground="#97A5B4" FontSize="20" Margin="0 0 0 8"/>
+                            <TextBlock Text="Duration"  FontSize="20" Margin="0 0 0 8"/>
                             <Grid >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="30"/>
@@ -194,30 +189,30 @@
                                 <TextBlock Grid.Column="1"  Margin="13 0" VerticalAlignment="Center" Foreground="#868686" IsHitTestVisible="False" Panel.ZIndex="1"
                                     FontSize="14"  
                                    Visibility="{Binding ElementName=EndWithtextBox, Converter={StaticResource BoolToVis}}" />
-                                <TextBox  Grid.Column="1" x:Name="DurationtextBox"/>
+                                <TextBox  Grid.Column="1" x:Name="DurationtextBox" Style="{StaticResource AddMeetingTextbox}"/>
                             </Grid>
                         </StackPanel>
                     </Grid>
 
                     <!--Guests-->
                     <StackPanel Grid.Row="3" Margin="20 10" Width="500" HorizontalAlignment="Left">
-                        <TextBlock Text="Guests" Foreground="#97A5B4" FontSize="20" Margin="0 0 0 8"/>
+                        <TextBlock Text="Guests"   FontSize="20" Margin="0 0 0 8"/>
                         <Grid >
                             <TextBlock  Margin="13 0" VerticalAlignment="Center" Foreground="#868686" IsHitTestVisible="False" Panel.ZIndex="1"
                                    Text="Enter the guests" FontSize="14" 
                                    Visibility="{Binding ElementName=GueststextBox, Converter={StaticResource BoolToVis}}" />
-                            <TextBox x:Name="GueststextBox"/>
+                            <TextBox x:Name="GueststextBox" Style="{StaticResource AddMeetingTextbox}"/>
                         </Grid>
                     </StackPanel>
 
                     <!--Description-->
                     <StackPanel Grid.Row="4" Margin="20 10" Width="500" HorizontalAlignment="Left">
-                        <TextBlock Text="Description" Foreground="#97A5B4" FontSize="20" Margin="0 0 0 8"/>
+                        <TextBlock Text="Description"  FontSize="20" Margin="0 0 0 8"/>
                         <Grid >
                             <TextBlock  Margin="13 0" VerticalAlignment="Center" Foreground="#868686" IsHitTestVisible="False" Panel.ZIndex="1"
                                    Text="Enter a Description" FontSize="14" 
                                    Visibility="{Binding ElementName=DescriptiontextBox, Converter={StaticResource BoolToVis}}" />
-                            <TextBox x:Name="DescriptiontextBox" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                            <TextBox x:Name="DescriptiontextBox" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Style="{StaticResource AddMeetingTextbox}"/>
                         </Grid>
                     </StackPanel>
 
