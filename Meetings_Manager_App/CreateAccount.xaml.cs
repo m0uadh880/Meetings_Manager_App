@@ -15,36 +15,27 @@ using System.Windows.Shapes;
 namespace Meetings_Manager_App
 {
     /// <summary>
-    /// Interaction logic for LogInWindow.xaml
+    /// Interaction logic for CreateAccount.xaml
     /// </summary>
-    public partial class LogInWindow : Window
+    public partial class CreateAccount : Window
     {
-        public LogInWindow()
+        public CreateAccount()
         {
             InitializeComponent();
-
             Loaded += MainWindow_Loaded;
 
         }
-
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Maximized;
         }
 
-        private void Signin_Click(object sender, RoutedEventArgs e)
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-
-            mainWindow.Show();
-            Close();
-        }
-
-        private void Create_account_Click(object sender, RoutedEventArgs e)
-        {
-            CreateAccount createAccount = new CreateAccount();
-            createAccount.Show();
+            LogInWindow logInWindow = new LogInWindow();
+            logInWindow.Show();
             Close();
         }
     }
+    
 }
