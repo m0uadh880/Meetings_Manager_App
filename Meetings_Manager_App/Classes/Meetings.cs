@@ -17,7 +17,7 @@ namespace Meetings_Manager_App.Classes
         public string DateAndTime {
             get
             {
-                return $"{Date} {Time}";
+                return $"{Date} at  {Time}";
             }
         }
         public string Duration { get; set; }

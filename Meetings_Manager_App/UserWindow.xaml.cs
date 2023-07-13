@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Meetings_Manager_App.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,10 +19,13 @@ namespace Meetings_Manager_App
     
     public partial class UserWindow : Window
     {
-        public UserWindow()
+        UserAccount user;
+        public UserWindow(UserAccount user)
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+            this.user = user;
+            UserNameTextBlock.Text = user.Username;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

@@ -10,8 +10,12 @@ namespace Meetings_Manager_App
 {
     public partial class App : Application
     {
-        static string DatabaseName = "Meetings.db";
-        static string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        public static string databasePath = System.IO.Path.Combine(folderPath, DatabaseName);
+        static string DatabaseName1 = "Meetings.db";
+        static string folderPath1 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public static string MeetingsdatabasePath = System.IO.Path.Combine(folderPath1, DatabaseName1);
+
+        static string DatabaseName2 = "UserAccount.db";
+        static string folderPath2 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public static string UserAccountdatabasePath = System.IO.Path.Combine(folderPath2, DatabaseName2);
     }
 }

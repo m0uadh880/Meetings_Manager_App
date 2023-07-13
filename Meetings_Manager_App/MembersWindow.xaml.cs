@@ -1,43 +1,38 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Input;
-using System.Windows.Forms;
+﻿using Meetings_Manager_App.Classes;
 using SQLite;
+using System;
 using System.Collections.Generic;
-using Meetings_Manager_App.Classes;
-using Meetings_Manager_App.Properties;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Forms;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace Meetings_Manager_App
 {
-
-    public partial class MainWindow : Window
+    public partial class MembersWindow : Window
     {
+        UserAccount selectedMeeting = new UserAccount();
 
-        Meetings selectedMeeting = new Meetings();
-        UserAccount userAccount;
-        public MainWindow()
-        {
-            InitializeComponent();
-            Loaded += MainWindow_Loaded;
-
-
-            ReadDataBase();
-        }
-        public MainWindow(UserAccount userAccount)
+        public MembersWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
 
             ReadDataBase();
-            this.userAccount = userAccount;
-            AdminNameTextBlock.Text = userAccount.Username;
-        }
 
+        }
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Maximized;
         }
-
         private bool IsMaximize = false;
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -72,7 +67,7 @@ namespace Meetings_Manager_App
         private void AddNewMeeeting_Click(object sender, RoutedEventArgs e)
         {
             AddMeetingWindow addMeetingWindow = new AddMeetingWindow();
-            
+
             addMeetingWindow.Show();
             ReadDataBase();
             Close();
@@ -81,8 +76,8 @@ namespace Meetings_Manager_App
 
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult result = System.Windows.Forms.MessageBox.Show("Are you sure ?", "Confirmation", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            
+            DialogResult result = System.Windows.Forms.MessageBox.Show("Are you sure ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
@@ -94,58 +89,49 @@ namespace Meetings_Manager_App
 
         void ReadDataBase()
         {
-            List<Meetings> meetings;
-            using (SQLiteConnection conn = new SQLiteConnection(App.MeetingsdatabasePath))
+            List<UserAccount> userAccounts;
+
+            //string DatabaseName = "UserAccount.db";
+            //string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //string databasePath = System.IO.Path.Combine(folderPath, DatabaseName);
+
+            using (SQLiteConnection conn = new SQLiteConnection(App.UserAccountdatabasePath))
             {
-                conn.CreateTable<Meetings>();
-                meetings = conn.Table<Meetings>().ToList();
+                conn.CreateTable<UserAccount>();
+                userAccounts = conn.Table<UserAccount>().ToList();
             }
 
-            if (meetings != null)
+            if (userAccounts != null)
             {
-                MeetingsDataGrid.ItemsSource = meetings;
+                MembersDataGrid.ItemsSource = userAccounts;
             }
 
         }
 
-        private void MeetingsDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void MembersDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            selectedMeeting = (Meetings)MeetingsDataGrid.SelectedItem;
-            
-        }
+            selectedMeeting = (UserAccount)MembersDataGrid.SelectedItem;
 
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (selectedMeeting != null)
-            {
-                AddMeetingWindow updateMeetingWindow = new AddMeetingWindow(selectedMeeting);
-                updateMeetingWindow.Show();
-                Close();
-            }
         }
-
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             DialogResult result = System.Windows.Forms.MessageBox.Show("Are you sure ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                using (SQLiteConnection conn = new SQLiteConnection(App.MeetingsdatabasePath))
+                //string DatabaseName = "UserAccount.db";
+                //string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                //string databasePath = System.IO.Path.Combine(folderPath, DatabaseName);
+
+                using (SQLiteConnection conn = new SQLiteConnection(App.UserAccountdatabasePath))
                 {
-                    conn.CreateTable<Meetings>();
+                    conn.CreateTable<UserAccount>();
                     conn.Delete(selectedMeeting);
                 }
                 ReadDataBase();
             }
-            
+
         }
 
-        private void MembersButton_Click(object sender, RoutedEventArgs e)
-        {
-            MembersWindow membersWindow = new MembersWindow();
-            membersWindow.Show();
-            Close();
-        }
     }
-
 }

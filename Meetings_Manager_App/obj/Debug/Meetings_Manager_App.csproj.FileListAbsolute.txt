@@ -48,3 +48,5 @@ C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\bin\Debu
 C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\Meetings_Manager_App_Content.g.cs
 C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\CreateAccount.g.cs
 C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\CreateAccount.baml
+C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\MembersWindow.g.cs
+C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\MembersWindow.baml

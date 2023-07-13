@@ -1,18 +1,19 @@
 ﻿
 using Meetings_Manager_App.Classes;
 using SQLite;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Meetings_Manager_App
 {
-    /// <summary>
-    /// Interaction logic for AddMeetingWindow.xaml
-    /// </summary>
     public partial class AddMeetingWindow : Window
     {
         Meetings meetings = null;
+        
+
         public AddMeetingWindow()
         {
             InitializeComponent();
@@ -87,6 +88,12 @@ namespace Meetings_Manager_App
                 this.Close();
             }
         }
+        private void MembersButton_Click(object sender, RoutedEventArgs e)
+        {
+            MembersWindow membersWindow = new MembersWindow();
+            membersWindow.Show();
+            Close();
+        }
 
         private void AddMeetingButton_Click(object sender, RoutedEventArgs e)
         {
@@ -100,7 +107,7 @@ namespace Meetings_Manager_App
                 meetings.Duration = DurationtextBox.Text;
                 meetings.Description = DescriptiontextBox.Text;
 
-                using (SQLiteConnection conn = new SQLiteConnection(App.databasePath))
+                using (SQLiteConnection conn = new SQLiteConnection(App.MeetingsdatabasePath))
                 {
                     conn.CreateTable<Meetings>();
                     conn.Update(meetings);
@@ -111,7 +118,7 @@ namespace Meetings_Manager_App
 
                 return;
             }
-            
+
             Meetings meeting = new Meetings()
             {
                 ProjectName = ProjectNametextBox.Text,
@@ -122,9 +129,10 @@ namespace Meetings_Manager_App
                 Description = DescriptiontextBox.Text,
             };
 
-            if (ProjectNametextBox.Text != "" && DatetextBox.Text != "" && StartWithtextBox.Text != "" && DurationtextBox.Text != "" && GueststextBox.Text != "" && DescriptiontextBox.Text != "")
+
+            if (ProjectNametextBox.Text != "" && DatetextBox.Text != "" && StartWithtextBox.Text != "" && DurationtextBox.Text != "" && /*GueststextBox.Text != "" &&*/ DescriptiontextBox.Text != "")
             {
-                using (SQLiteConnection connection = new SQLiteConnection(App.databasePath))
+                using (SQLiteConnection connection = new SQLiteConnection(App.MeetingsdatabasePath))
                 {
                     connection.CreateTable<Meetings>();
                     connection.Insert(meeting);
@@ -136,5 +144,6 @@ namespace Meetings_Manager_App
             }
             
         }
+
     }
 }
