@@ -133,5 +133,9 @@ namespace Meetings_Manager_App
 
         }
 
+        private void MembersButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

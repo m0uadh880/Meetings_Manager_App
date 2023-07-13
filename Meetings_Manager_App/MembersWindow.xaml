@@ -61,7 +61,7 @@
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" Background="#ea580c" Foreground="White">
+                            <Button  Style="{StaticResource menuButton}" Background="#ea580c" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Members"/>

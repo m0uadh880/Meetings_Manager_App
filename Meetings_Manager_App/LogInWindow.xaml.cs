@@ -63,7 +63,14 @@ namespace Meetings_Manager_App
             }
             else
             {
-                System.Windows.MessageBox.Show("Email or password is incorrect.", "Invalid Credentials", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
+                if(EmailInput == "" && passwordInput == "")
+                    System.Windows.MessageBox.Show("Email and password are empty.", "Invalid Credentials", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
+                else if (EmailInput == "" )
+                    System.Windows.MessageBox.Show("Email is empty.", "Invalid Credentials", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
+                else
+                    System.Windows.MessageBox.Show("password is empty.", "Invalid Credentials", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
+
+
             }
 
         }
