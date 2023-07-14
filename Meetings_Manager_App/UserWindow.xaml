@@ -51,15 +51,17 @@
                             <Button Style="{StaticResource menuButton}" Background="#ea580c" Foreground="White">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource menuButtonIcon}"/>
-                                    <TextBlock Text="Project 1" />
+                                    <TextBlock Text="Project 1" x:Name="ButtonTextBlock" />
                                 </StackPanel>
                             </Button>
+                            
                             <Button Style="{StaticResource menuButton}" >
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Project 2" />
                                 </StackPanel>
                             </Button>
+                            
                             <Button Style="{StaticResource menuButton}" >
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource menuButtonIcon}"/>
@@ -111,8 +113,7 @@
                 <!--Members Data Grid-->
                 <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="MeetingsDataGrid">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>
-                        <DataGridTextColumn Header="Admin Name" Binding="{Binding AdminName}" IsReadOnly="True" Width="*"/>
+                        <DataGridTextColumn Header="Admin Name" Binding="{Binding ProjectName}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="Date and Time" Binding="{Binding DateAndTime}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="Guests" Binding="{Binding Guests}" IsReadOnly="True" Width="*"/>
