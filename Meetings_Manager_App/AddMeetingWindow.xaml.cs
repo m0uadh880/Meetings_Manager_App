@@ -12,12 +12,16 @@ namespace Meetings_Manager_App
     public partial class AddMeetingWindow : Window
     {
         Meetings meetings = null;
-        
+        List<UserAccount> accounts;
+        List<Meetings> meetings;
 
         public AddMeetingWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+            ReadDataBase();
+
+            GuestsListBox.ItemsSource = accounts ;
         }
 
         public AddMeetingWindow(Meetings meetings)
@@ -30,7 +34,6 @@ namespace Meetings_Manager_App
             DatetextBox.Text = meetings.Date;
             StartWithtextBox.Text = meetings.Time;
             DurationtextBox.Text = meetings.Duration;
-            GueststextBox.Text = meetings.Guests;
             DescriptiontextBox.Text = meetings.Description;
             SaveButton.Content = "Update";
         }
@@ -39,6 +42,7 @@ namespace Meetings_Manager_App
         {
             WindowState = WindowState.Maximized;
         }
+
         private bool IsMaximize = false;
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -88,6 +92,7 @@ namespace Meetings_Manager_App
                 this.Close();
             }
         }
+
         private void MembersButton_Click(object sender, RoutedEventArgs e)
         {
             MembersWindow membersWindow = new MembersWindow();
@@ -103,7 +108,6 @@ namespace Meetings_Manager_App
                 meetings.ProjectName = ProjectNametextBox.Text;
                 meetings.Date = DatetextBox.Text;
                 meetings.Time = StartWithtextBox.Text;
-                meetings.Guests = GueststextBox.Text;
                 meetings.Duration = DurationtextBox.Text;
                 meetings.Description = DescriptiontextBox.Text;
 
@@ -125,10 +129,9 @@ namespace Meetings_Manager_App
                 Date = DatetextBox.Text,
                 Time = StartWithtextBox.Text,
                 Duration = DurationtextBox.Text,
-                Guests = GueststextBox.Text,
+                //Guests = GueststextBox.Text,
                 Description = DescriptiontextBox.Text,
             };
-
 
             if (ProjectNametextBox.Text != "" && DatetextBox.Text != "" && StartWithtextBox.Text != "" && DurationtextBox.Text != "" && /*GueststextBox.Text != "" &&*/ DescriptiontextBox.Text != "")
             {
@@ -141,6 +144,16 @@ namespace Meetings_Manager_App
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 Close();
+            }
+            
+        }
+
+        void ReadDataBase()
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(App.UserAccountdatabasePath))
+            {
+                connection.CreateTable<UserAccount>();
+                accounts = connection.Table<UserAccount>().ToList();
             }
             
         }

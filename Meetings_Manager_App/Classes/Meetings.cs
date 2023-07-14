@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SQLite;
+﻿using SQLite;
 
 namespace Meetings_Manager_App.Classes
 {
@@ -21,7 +16,6 @@ namespace Meetings_Manager_App.Classes
             }
         }
         public string Duration { get; set; }
-        public string Guests { get; set; }
         public string Description { get; set; }
     }
 }

@@ -30,10 +30,6 @@ namespace Meetings_Manager_App
 
             var projectNames = meetings.Select(m => m.ProjectName).ToHashSet();
             ButtonsItemControl.ItemsSource = projectNames;
-
-
-            
-
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

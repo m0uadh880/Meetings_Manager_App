@@ -199,7 +199,16 @@
                         <!--Guests-->
                         <StackPanel Grid.Row="3" Margin="20 10" Width="500" HorizontalAlignment="Left">
                             <TextBlock Text="Guests"   FontSize="20" Margin="0 0 0 8"/>
-                            <TextBox x:Name="GueststextBox" TextWrapping="Wrap"  AcceptsReturn="True"  Style="{StaticResource AddMeetingTextbox}"/>
+                            <!--<TextBox x:Name="GueststextBox" TextWrapping="Wrap"  AcceptsReturn="True"  Style="{StaticResource AddMeetingTextbox}"/>-->
+                            <ScrollViewer Height="80">
+                                <ListBox x:Name="GuestsListBox" SelectionMode="Multiple">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Email}" />
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </ScrollViewer>
                         </StackPanel>
 
                         <!--Description-->

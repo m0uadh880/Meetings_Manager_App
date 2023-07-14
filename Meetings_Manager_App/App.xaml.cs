@@ -17,5 +17,9 @@ namespace Meetings_Manager_App
         static string DatabaseName2 = "UserAccount.db";
         static string folderPath2 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
         public static string UserAccountdatabasePath = System.IO.Path.Combine(folderPath2, DatabaseName2);
+
+        static string DatabaseName3 = "UserMeeting.db";
+        static string folderPath3 = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        public static string UserMeetingdatabasePath = System.IO.Path.Combine(folderPath3, DatabaseName3);
     }
 }
