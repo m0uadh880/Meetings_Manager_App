@@ -93,9 +93,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\Guests.cs" />
     <Compile Include="Classes\Meetings.cs" />
     <Compile Include="Classes\UserAccount.cs" />
+    <Compile Include="Classes\UserMeeting.cs" />
     <Compile Include="CreateAccount.xaml.cs">
       <DependentUpon>CreateAccount.xaml</DependentUpon>
     </Compile>

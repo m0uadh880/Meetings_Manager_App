@@ -111,7 +111,6 @@ namespace Meetings_Manager_App
         private void MeetingsDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             selectedMeeting = (Meetings)MeetingsDataGrid.SelectedItem;
-            
         }
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)

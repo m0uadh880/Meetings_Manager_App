@@ -11,9 +11,11 @@ namespace Meetings_Manager_App
 {
     public partial class AddMeetingWindow : Window
     {
-        Meetings meetings = null;
-        List<UserAccount> accounts;
-        List<Meetings> meetings;
+        private Meetings meetings = null;
+        private List<UserAccount> accounts;
+        private List<Meetings> meetingsList;
+        private List<UserMeeting> userMeeting;
+        private List<string> EmailsAdded = new List<string>();
 
         public AddMeetingWindow()
         {
@@ -21,7 +23,6 @@ namespace Meetings_Manager_App
             Loaded += MainWindow_Loaded;
             ReadDataBase();
 
-            GuestsListBox.ItemsSource = accounts ;
         }
 
         public AddMeetingWindow(Meetings meetings)
@@ -44,6 +45,7 @@ namespace Meetings_Manager_App
         }
 
         private bool IsMaximize = false;
+
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -129,9 +131,10 @@ namespace Meetings_Manager_App
                 Date = DatetextBox.Text,
                 Time = StartWithtextBox.Text,
                 Duration = DurationtextBox.Text,
-                //Guests = GueststextBox.Text,
                 Description = DescriptiontextBox.Text,
             };
+
+
 
             if (ProjectNametextBox.Text != "" && DatetextBox.Text != "" && StartWithtextBox.Text != "" && DurationtextBox.Text != "" && /*GueststextBox.Text != "" &&*/ DescriptiontextBox.Text != "")
             {
@@ -155,8 +158,21 @@ namespace Meetings_Manager_App
                 connection.CreateTable<UserAccount>();
                 accounts = connection.Table<UserAccount>().ToList();
             }
-            
+
+            using (SQLiteConnection connection = new SQLiteConnection(App.MeetingsdatabasePath))
+            {
+                connection.CreateTable<Meetings>();
+                meetingsList = connection.Table<Meetings>().ToList();
+            }
+
+            using (SQLiteConnection connection = new SQLiteConnection(App.UserMeetingdatabasePath))
+            {
+                connection.CreateTable<UserMeeting>();
+                userMeeting = connection.Table<UserMeeting>().ToList();
+            }
+
         }
+
 
     }
 }
