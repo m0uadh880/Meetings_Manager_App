@@ -5,14 +5,21 @@ using System.Windows.Input;
 using SQLite;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Xml;
+using Button = System.Windows.Controls.Button;
 
 namespace Meetings_Manager_App
 {
-    
+
     public partial class UserWindow : Window
     {
         UserAccount user;
         List<Meetings> meetings;
+        private Button lastClickedButton;
+
+
         public UserWindow(UserAccount user)
         {
             InitializeComponent();
@@ -21,16 +28,18 @@ namespace Meetings_Manager_App
             UserNameTextBlock.Text = user.Username;
             ReadMeetingsDataBase();
 
-            string projectName = ButtonTextBlock.Text;
+            var projectNames = meetings.Select(m => m.ProjectName).ToHashSet();
+            ButtonsItemControl.ItemsSource = projectNames;
 
-            var relatedMeetings = meetings.Where(m => m.ProjectName == projectName).ToList();
-            MeetingsDataGrid.ItemsSource = relatedMeetings;
+
+            
+
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Maximized;
-        }
+        }   
 
         private bool IsMaximize = false;
 
@@ -84,6 +93,33 @@ namespace Meetings_Manager_App
                 meetings = connection.Table<Meetings>().ToList();
             }
         }
+
+        private void ProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = (Button)sender;
+
+            if (lastClickedButton != null)
+            {
+                // Restore the background of the last clicked button
+                lastClickedButton.Background = null;
+                lastClickedButton.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xEA, 0x58, 0x0C));
+            }
+
+            // Change the background of the clicked button
+            clickedButton.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xEA, 0x58, 0x0C));
+            clickedButton.Foreground = new SolidColorBrush(Colors.White);
+
+            // Update the last clicked button reference
+            lastClickedButton = clickedButton;
+
+            
+            string projectName = (string)clickedButton.Content;
+            pageTitle.Text = projectName;
+
+            var relatedMeetings = meetings.Where(m => m.ProjectName == projectName).ToList();
+            MeetingsDataGrid.ItemsSource = relatedMeetings;
+        }
+
     }
 
 }
