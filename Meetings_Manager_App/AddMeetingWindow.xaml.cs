@@ -16,7 +16,7 @@ namespace Meetings_Manager_App
         private Meetings meetings = null;
         private List<UserAccount> accounts;
         private List<Meetings> meetingsList;
-        private List<UserMeeting> EmailsAdded = new List<UserMeeting>();
+        private HashSet<UserMeeting> EmailsAdded = new HashSet<UserMeeting>();
         string selectedEmail;
         UserMeeting userEmailAndProjectName = null;
 
@@ -35,6 +35,7 @@ namespace Meetings_Manager_App
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+            ReadDataBase();
 
             this.meetings = meetings;
             ProjectNametextBox.Text = meetings.ProjectName;
@@ -42,6 +43,9 @@ namespace Meetings_Manager_App
             StartWithtextBox.Text = meetings.Time;
             DurationtextBox.Text = meetings.Duration;
             DescriptiontextBox.Text = meetings.Description;
+            GuestsDataGrid.ItemsSource = accounts.Select(item => new {
+                Email = item.Email
+            }).ToList();
             SaveButton.Content = "Update";
         }
 
@@ -124,6 +128,16 @@ namespace Meetings_Manager_App
                     conn.CreateTable<Meetings>();
                     conn.Update(meetings);
                 }
+
+                using (SQLiteConnection connection = new SQLiteConnection(App.UserMeetingdatabasePath))
+                {
+                    connection.CreateTable<UserMeeting>();
+                    foreach (var item in EmailsAdded)
+                    {
+                        connection.Insert(item);
+                    }
+                }
+
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 Close();

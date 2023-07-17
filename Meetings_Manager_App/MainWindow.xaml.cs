@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using SQLite;
 using System.Collections.Generic;
 using Meetings_Manager_App.Classes;
-using Meetings_Manager_App.Properties;
 using System.Linq;
 
 namespace Meetings_Manager_App

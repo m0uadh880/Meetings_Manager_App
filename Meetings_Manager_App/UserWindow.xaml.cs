@@ -17,6 +17,7 @@ namespace Meetings_Manager_App
     {
         UserAccount user;
         List<Meetings> meetings;
+        List<UserMeeting> userMeetings;
         private Button lastClickedButton;
 
 
@@ -28,8 +29,12 @@ namespace Meetings_Manager_App
             UserNameTextBlock.Text = user.Username;
             ReadMeetingsDataBase();
 
-            var projectNames = meetings.Select(m => m.ProjectName).ToHashSet();
+            
+
+            var projectNames = userMeetings.Where(a => a.Email == user.Email).Select(item => item.ProjectName);
             ButtonsItemControl.ItemsSource = projectNames;
+
+
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -83,10 +88,16 @@ namespace Meetings_Manager_App
 
         void ReadMeetingsDataBase()
         {
-            using(SQLiteConnection connection = new SQLiteConnection(App.MeetingsdatabasePath))
+            using (SQLiteConnection connection = new SQLiteConnection(App.MeetingsdatabasePath))
             {
                 connection.CreateTable<Meetings>();
                 meetings = connection.Table<Meetings>().ToList();
+            }
+
+            using (SQLiteConnection connection = new SQLiteConnection(App.UserMeetingdatabasePath))
+            {
+                connection.CreateTable<UserMeeting>();
+                userMeetings = connection.Table<UserMeeting>().ToList();
             }
         }
 
