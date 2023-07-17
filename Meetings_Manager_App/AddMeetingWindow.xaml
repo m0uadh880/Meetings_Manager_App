@@ -197,9 +197,20 @@
                         </Grid>
 
                         <!--Guests-->
-                        <StackPanel Grid.Row="3" Margin="20 10" Width="500" HorizontalAlignment="Left">
+                            <StackPanel Grid.Row="3" Margin="20 10" Width="500" HorizontalAlignment="Left">
                             <TextBlock Text="Guests"   FontSize="20" Margin="0 0 0 8"/>
-                            <!--<TextBox x:Name="GueststextBox" TextWrapping="Wrap"  AcceptsReturn="True"  Style="{StaticResource AddMeetingTextbox}"/>-->
+                            <DataGrid x:Name="GuestsDataGrid" SelectionChanged="GuestsDataGrid_SelectionChanged" FontSize="15" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" RowStyle="{DynamicResource DataGridRowStyle1}" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding Email}" />
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Click="AddButton_Click" Content="Add" Style="{StaticResource gridEditButton}" />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                             </DataGrid>
                         </StackPanel>
 
                         <!--Description-->

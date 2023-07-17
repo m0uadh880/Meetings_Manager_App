@@ -6,6 +6,7 @@ using SQLite;
 using System.Collections.Generic;
 using Meetings_Manager_App.Classes;
 using Meetings_Manager_App.Properties;
+using System.Linq;
 
 namespace Meetings_Manager_App
 {
@@ -15,6 +16,10 @@ namespace Meetings_Manager_App
 
         Meetings selectedMeeting = new Meetings();
         UserAccount userAccount;
+        private List<UserMeeting> userMeeting;
+        private List<UserMeeting> GuestesEmailsOfSelectedProject = new List<UserMeeting>();
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,6 +36,8 @@ namespace Meetings_Manager_App
             ReadDataBase();
             this.userAccount = userAccount;
             AdminNameTextBlock.Text = userAccount.Username;
+
+            
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -106,6 +113,13 @@ namespace Meetings_Manager_App
                 MeetingsDataGrid.ItemsSource = meetings;
             }
 
+
+            using (SQLiteConnection connection = new SQLiteConnection(App.UserMeetingdatabasePath))
+            {
+                connection.CreateTable<UserMeeting>();
+                userMeeting = connection.Table<UserMeeting>().ToList();
+            }
+
         }
 
         private void MeetingsDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -144,6 +158,18 @@ namespace Meetings_Manager_App
             MembersWindow membersWindow = new MembersWindow();
             membersWindow.Show();
             Close();
+        }
+
+        private void ShowGuestsButton_Click(object sender, RoutedEventArgs e)
+        {
+            string projectName = selectedMeeting.ProjectName;
+            if (projectName != null) {
+
+                GuestesEmailsOfSelectedProject = userMeeting.Where(item => item.ProjectName == projectName).ToList();
+
+                GuestsWindow guestsWindow = new GuestsWindow(GuestesEmailsOfSelectedProject);
+                guestsWindow.Show();
+            }
         }
     }
 

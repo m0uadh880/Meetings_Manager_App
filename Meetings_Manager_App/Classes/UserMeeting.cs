@@ -6,9 +6,7 @@ namespace Meetings_Manager_App.Classes
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        [Indexed]
-        public int userId { get; set; }
-        [Indexed]
-        public int MeetingId { get; set; }
+        public string Email { get; set; }
+        public string ProjectName { get; set; }
     }
 }

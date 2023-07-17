@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\App.xaml
-6-1376407037
+7-1204432188
 3323631478
-14773652075
+15789313754
 1312042301970
-AddMeetingWindow.xaml;CreateAccount.xaml;LogInWindow.xaml;MainWindow.xaml;MembersWindow.xaml;UserWindow.xaml;
+AddMeetingWindow.xaml;CreateAccount.xaml;GuestsWindow.xaml;LogInWindow.xaml;MainWindow.xaml;MembersWindow.xaml;UserWindow.xaml;
 
-False
+True
 

@@ -119,7 +119,11 @@
                         <DataGridTextColumn Header="Date and Time" Binding="{Binding DateAndTime}" IsReadOnly="True" Width="*"/>
                         <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" IsReadOnly="True" Width="*"/>
                         <DataGridTemplateColumn Header="Guests" IsReadOnly="True" Width="auto">
-                            
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Click="ShowGuestsButton_Click" Background="DarkOrange" Content="show guests" Style="{StaticResource gridEditButton}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Description" Binding="{Binding Description}" IsReadOnly="True" Width="*"/>
                         <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
