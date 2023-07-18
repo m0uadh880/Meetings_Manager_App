@@ -11,11 +11,13 @@ using System.Windows.Controls;
 using TextBox = System.Windows.Controls.TextBox;
 using System.Diagnostics.Contracts;
 using System.Windows.Media;
+using Button = System.Windows.Controls.Button;
+using System;
+using MahApps.Metro.IconPacks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Meetings_Manager_App
 {
-
-    
     public partial class AddMeetingWindow : Window
     {
         private Meetings meetings = null;
@@ -104,7 +106,7 @@ namespace Meetings_Manager_App
         {
             DialogResult result = System.Windows.Forms.MessageBox.Show("Are you sure ?", "Confirmation", System.Windows.Forms.MessageBoxButtons.YesNo);
 
-            if(result == System.Windows.Forms.DialogResult.Yes)
+            if (result == System.Windows.Forms.DialogResult.Yes)
             {
                 LogInWindow logInWindow = new LogInWindow();
                 logInWindow.Show();
@@ -122,7 +124,7 @@ namespace Meetings_Manager_App
         private void AddMeetingButton_Click(object sender, RoutedEventArgs e)
         {
 
-            if(SaveButton.Content == "Update")
+            if (SaveButton.Content == "Update")
             {
                 meetings.ProjectName = ProjectNametextBox.Text;
                 meetings.Date = DatetextBox.Text;
@@ -182,7 +184,7 @@ namespace Meetings_Manager_App
                 mainWindow.Show();
                 Close();
             }
-            
+
         }
 
         void ReadDataBase()
@@ -208,7 +210,7 @@ namespace Meetings_Manager_App
 
         //private void AddButton_Click(object sender, RoutedEventArgs e)
         //{
-            
+
         //        UserMeeting userEmailAndProjectName = new UserMeeting()
         //        {
         //            Email = selectedEmail,
@@ -221,34 +223,85 @@ namespace Meetings_Manager_App
         private void GuestsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedEmail = (UserAccount)GuestsListView.SelectedItem;
-            if(selectedEmail != null)
+
+            if (selectedEmail != null && !selectedMails.Contains(selectedEmail.Email))
             {
+                selectedMails.Add(selectedEmail.Email);
 
-                if (!selectedMails.Contains(selectedEmail.Email))
+                UserMeeting userEmailAndProjectName = new UserMeeting()
                 {
-                    selectedMails.Add(selectedEmail.Email);
+                    Email = selectedEmail.Email,
+                    ProjectName = ProjectNametextBox.Text,
+                };
 
-                    UserMeeting userEmailAndProjectName = new UserMeeting()
+
+                EmailsAdded.Add(userEmailAndProjectName);
+                
+                Grid grid = new Grid();
+
+                ColumnDefinition column1 = new ColumnDefinition();
+                ColumnDefinition column2 = new ColumnDefinition();
+
+                column1.Width = new GridLength(250);
+                column2.Width = new GridLength(50);
+
+                grid.ColumnDefinitions.Add(column1);
+                grid.ColumnDefinitions.Add(column2);
+                
+
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = userEmailAndProjectName.Email;
+                textBlock.FontSize = 15;
+                textBlock.VerticalAlignment = VerticalAlignment.Center;
+
+                PackIconMaterial packIcon = new PackIconMaterial();
+                packIcon.Kind = PackIconMaterialKind.Close;
+
+                Button deleteButton = new Button();
+
+                deleteButton.BorderBrush = null;
+                deleteButton.BorderThickness = new Thickness(0);
+                deleteButton.Content = packIcon;
+                deleteButton.Click += DeleteButton_Click;
+                deleteButton.VerticalAlignment = VerticalAlignment.Center;
+                deleteButton.Background = null;
+                deleteButton.DataContext = textBlock.Text;
+
+                    
+                deleteButton.Click += (sender3, e3) =>
+                {
+                    if (stackPanel.Children.Contains(grid))
                     {
-                        Email = selectedEmail.Email,
-                        ProjectName = ProjectNametextBox.Text,
-                    };
+                        stackPanel.Children.Remove(grid);
+                    }
+                };
 
+                grid.Children.Add(textBlock);
+                grid.Children.Add(deleteButton);
 
-                    EmailsAdded.Add(userEmailAndProjectName);
-                    TextBlock dynamicTextBlock = new TextBlock();
-                    dynamicTextBlock.Height = 40;
-                    dynamicTextBlock.Width = 200;
-                    dynamicTextBlock.Background = new SolidColorBrush(Colors.LightGray);
-                    dynamicTextBlock.Foreground = new SolidColorBrush(Colors.Black);
-                    dynamicTextBlock.FontSize = 18;
+                Grid.SetColumn(textBlock, 0);
+                Grid.SetColumn(deleteButton, 1);
 
-                    dynamicTextBlock.Text = userEmailAndProjectName.Email;
-                    textBlockContainer.Children.Add(dynamicTextBlock);
-                }
-                
-                
+                grid.Background = new  SolidColorBrush(Color.FromArgb(0xFF, 0xd4, 0xd4, 0xd8));
+                stackPanel.Children.Add(grid);
             }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.DataContext is string text)
+            {
+                foreach(var item in EmailsAdded)
+                {
+                    if(text == item.Email)
+                    {
+                       EmailsAdded.Remove(item);
+                        selectedMails.Remove(item.Email);
+                        break;
+                    }
+                }
+            }
+
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

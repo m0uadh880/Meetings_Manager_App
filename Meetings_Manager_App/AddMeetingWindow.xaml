@@ -226,7 +226,7 @@
                                     </ListView>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="1" x:Name="textBlockContainer" />
+                                <StackPanel Grid.Column="1" x:Name="stackPanel" />
 
                             </Grid>
                         </StackPanel>
