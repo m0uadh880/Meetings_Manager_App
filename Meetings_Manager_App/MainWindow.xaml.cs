@@ -6,6 +6,7 @@ using SQLite;
 using System.Collections.Generic;
 using Meetings_Manager_App.Classes;
 using System.Linq;
+using System;
 
 namespace Meetings_Manager_App
 {
@@ -24,7 +25,6 @@ namespace Meetings_Manager_App
             InitializeComponent();
             Loaded += MainWindow_Loaded;
 
-
             ReadDataBase();
         }
         public MainWindow(UserAccount userAccount)
@@ -35,8 +35,6 @@ namespace Meetings_Manager_App
             ReadDataBase();
             this.userAccount = userAccount;
             AdminNameTextBlock.Text = userAccount.Username;
-
-            
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -112,7 +110,6 @@ namespace Meetings_Manager_App
                 MeetingsDataGrid.ItemsSource = meetings;
             }
 
-
             using (SQLiteConnection connection = new SQLiteConnection(App.UserMeetingdatabasePath))
             {
                 connection.CreateTable<UserMeeting>();
@@ -136,7 +133,7 @@ namespace Meetings_Manager_App
             }
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteButton_Click(object sender, RoutedEventArgs e) 
         {
             DialogResult result = System.Windows.Forms.MessageBox.Show("Are you sure ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -176,6 +173,10 @@ namespace Meetings_Manager_App
             if (projectName != null) {
 
                 GuestesEmailsOfSelectedProject = userMeeting.Where(item => item.ProjectName == projectName).ToList();
+
+                //mainFrame.Navigate(new Uri("ShowGuests.xaml", UriKind.Relative), GuestesEmailsOfSelectedProject);
+                //ShowGuests showGuests = new ShowGuests(GuestesEmailsOfSelectedProject);
+                //mainFrame.Navigate(showGuests);
 
                 GuestsWindow guestsWindow = new GuestsWindow(GuestesEmailsOfSelectedProject);
                 guestsWindow.Show();

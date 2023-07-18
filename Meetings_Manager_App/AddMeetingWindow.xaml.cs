@@ -6,15 +6,12 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using TextBox = System.Windows.Controls.TextBox;
-using System.Diagnostics.Contracts;
 using System.Windows.Media;
 using Button = System.Windows.Controls.Button;
 using System;
 using MahApps.Metro.IconPacks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Meetings_Manager_App
 {

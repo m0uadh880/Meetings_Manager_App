@@ -108,6 +108,9 @@
     <Compile Include="MembersWindow.xaml.cs">
       <DependentUpon>MembersWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShowGuests.xaml.cs">
+      <DependentUpon>ShowGuests.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
@@ -146,6 +149,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MembersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShowGuests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
