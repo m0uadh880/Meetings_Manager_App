@@ -25,6 +25,7 @@ namespace Meetings_Manager_App
         private List<Meetings> meetingsList = new List<Meetings>();
         private List<UserMeeting> userMeetings = new List<UserMeeting>();
         private HashSet<UserMeeting> EmailsAdded = null;
+        private HashSet<UserMeeting> EmailsAddedAfteUpdate;
 
         private UserMeeting userEmailAndProjectName = null;
         private UserAccount selectedEmail = new UserAccount();
@@ -45,6 +46,7 @@ namespace Meetings_Manager_App
             InitializeComponent();
             Loaded += MainWindow_Loaded;
             ReadDataBase();
+            EmailsAddedAfteUpdate = new HashSet<UserMeeting>();
 
             this.meetings = meetings;
             ProjectNametextBox.Text = meetings.ProjectName;
@@ -54,11 +56,14 @@ namespace Meetings_Manager_App
             DescriptiontextBox.Text = meetings.Description;
             selectedMails.Clear();
 
-            EmailsAdded = userMeetings.Where(item => item.ProjectName.Equals(meetings.ProjectName)).ToHashSet();
+            EmailsAdded = userMeetings.Where(item => item.ProjectName.Equals(meetings.ProjectName)).Distinct().ToHashSet();
             foreach (var item in EmailsAdded)
             {
-                selectedMails.Add(item.Email);
-                showEmailsAdded(item.Email);
+                if (!selectedMails.Contains(item.Email))
+                {
+                    selectedMails.Add(item.Email);
+                    showEmailsAdded(item.Email);
+                }
             }
 
             SaveButton.Content = "Update";
@@ -147,7 +152,7 @@ namespace Meetings_Manager_App
                 using (SQLiteConnection connection = new SQLiteConnection(App.UserMeetingdatabasePath))
                 {
                     connection.CreateTable<UserMeeting>();
-                    foreach (var item in EmailsAdded)
+                    foreach (var item in EmailsAddedAfteUpdate)
                     {
                         connection.Insert(item);
                     }
@@ -216,22 +221,45 @@ namespace Meetings_Manager_App
         }
         private void GuestsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedEmail = (UserAccount)GuestsListView.SelectedItem;
-
-            if (selectedEmail != null && !selectedMails.Contains(selectedEmail.Email))
+            if (SaveButton.Content == "Update")
             {
-                selectedMails.Add(selectedEmail.Email);
+                selectedEmail = (UserAccount)GuestsListView.SelectedItem;
 
-                UserMeeting userEmailAndProjectName = new UserMeeting()
+                if (selectedEmail != null && !selectedMails.Contains(selectedEmail.Email))
                 {
-                    Email = selectedEmail.Email,
-                    ProjectName = ProjectNametextBox.Text,
-                };
+                    selectedMails.Add(selectedEmail.Email);
+
+                    UserMeeting userEmailAndProjectName = new UserMeeting()
+                    {
+                        Email = selectedEmail.Email,
+                        ProjectName = ProjectNametextBox.Text,
+                    };
 
 
-                EmailsAdded.Add(userEmailAndProjectName);
-                showEmailsAdded(userEmailAndProjectName.Email);
+                    EmailsAddedAfteUpdate.Add(userEmailAndProjectName);
+                    showEmailsAdded(userEmailAndProjectName.Email);
+                }
             }
+            else
+            {
+                selectedEmail = (UserAccount)GuestsListView.SelectedItem;
+
+                if (selectedEmail != null && !selectedMails.Contains(selectedEmail.Email))
+                {
+                    selectedMails.Add(selectedEmail.Email);
+
+                    UserMeeting userEmailAndProjectName = new UserMeeting()
+                    {
+                        Email = selectedEmail.Email,
+                        ProjectName = ProjectNametextBox.Text,
+                    };
+
+
+                    EmailsAdded.Add(userEmailAndProjectName);
+                    showEmailsAdded(userEmailAndProjectName.Email);
+                }
+            }
+
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
