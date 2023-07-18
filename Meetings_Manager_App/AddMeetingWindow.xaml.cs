@@ -21,23 +21,23 @@ namespace Meetings_Manager_App
     public partial class AddMeetingWindow : Window
     {
         private Meetings meetings = null;
-        private List<UserAccount> accounts;
-        private List<Meetings> meetingsList;
-        private List<UserMeeting> EmailsAdded = new List<UserMeeting>();
-        UserMeeting userEmailAndProjectName = null;
-        UserAccount selectedEmail = new UserAccount();
-        List<string> selectedMails = new List<string>();
+        private List<UserAccount> accounts = new List<UserAccount>();
+        private List<Meetings> meetingsList = new List<Meetings>();
+        private List<UserMeeting> userMeetings = new List<UserMeeting>();
+        private HashSet<UserMeeting> EmailsAdded = null;
+
+        private UserMeeting userEmailAndProjectName = null;
+        private UserAccount selectedEmail = new UserAccount();
+        private List<string> selectedMails = new List<string>();
 
 
         public AddMeetingWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
-            ReadDataBase();
 
-            //GuestsDataGrid.ItemsSource = accounts.Select(item => new {
-            //   Email = item.Email
-            //}).ToList();
+            EmailsAdded = new HashSet<UserMeeting>();
+            ReadDataBase();
         }
 
         public AddMeetingWindow(Meetings meetings)
@@ -52,9 +52,15 @@ namespace Meetings_Manager_App
             StartWithtextBox.Text = meetings.Time;
             DurationtextBox.Text = meetings.Duration;
             DescriptiontextBox.Text = meetings.Description;
-            //GuestsDataGrid.ItemsSource = accounts.Select(item => new {
-            //    Email = item.Email
-            //}).ToList();
+            selectedMails.Clear();
+
+            EmailsAdded = userMeetings.Where(item => item.ProjectName.Equals(meetings.ProjectName)).ToHashSet();
+            foreach (var item in EmailsAdded)
+            {
+                selectedMails.Add(item.Email);
+                showEmailsAdded(item.Email);
+            }
+
             SaveButton.Content = "Update";
         }
 
@@ -151,42 +157,43 @@ namespace Meetings_Manager_App
                 mainWindow.Show();
                 Close();
 
-                return;
+                
             }
-
-            Meetings meeting = new Meetings()
+            else
             {
-                ProjectName = ProjectNametextBox.Text,
-                Date = DatetextBox.Text,
-                Time = StartWithtextBox.Text,
-                Duration = DurationtextBox.Text,
-                Description = DescriptiontextBox.Text,
-            };
-
-            if (ProjectNametextBox.Text != "" && DatetextBox.Text != "" && StartWithtextBox.Text != "" && DurationtextBox.Text != "" && /*GueststextBox.Text != "" &&*/ DescriptiontextBox.Text != "")
-            {
-                using (SQLiteConnection connection = new SQLiteConnection(App.MeetingsdatabasePath))
+                Meetings meeting = new Meetings()
                 {
-                    connection.CreateTable<Meetings>();
-                    connection.Insert(meeting);
-                }
+                    ProjectName = ProjectNametextBox.Text,
+                    Date = DatetextBox.Text,
+                    Time = StartWithtextBox.Text,
+                    Duration = DurationtextBox.Text,
+                    Description = DescriptiontextBox.Text,
+                };
 
-                using (SQLiteConnection connection = new SQLiteConnection(App.UserMeetingdatabasePath))
+                if (ProjectNametextBox.Text != "" && DatetextBox.Text != "" && StartWithtextBox.Text != "" && DurationtextBox.Text != "" && /*GueststextBox.Text != "" &&*/ DescriptiontextBox.Text != "")
                 {
-                    connection.CreateTable<UserMeeting>();
-                    foreach (var item in EmailsAdded)
+                    using (SQLiteConnection connection = new SQLiteConnection(App.MeetingsdatabasePath))
                     {
-                        connection.Insert(item);
+                        connection.CreateTable<Meetings>();
+                        connection.Insert(meeting);
                     }
-                }
 
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
-                Close();
+                    using (SQLiteConnection connection = new SQLiteConnection(App.UserMeetingdatabasePath))
+                    {
+                        connection.CreateTable<UserMeeting>();
+                        foreach (var item in EmailsAdded)
+                        {
+                            connection.Insert(item);
+                        }
+                    }
+
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    Close();
+                }
             }
 
         }
-
         void ReadDataBase()
         {
             using (SQLiteConnection connection = new SQLiteConnection(App.UserAccountdatabasePath))
@@ -200,26 +207,13 @@ namespace Meetings_Manager_App
                 connection.CreateTable<Meetings>();
                 meetingsList = connection.Table<Meetings>().ToList();
             }
+
+            using (SQLiteConnection connection = new SQLiteConnection(App.UserMeetingdatabasePath))
+            {
+                connection.CreateTable<UserMeeting>();
+                userMeetings = connection.Table<UserMeeting>().ToList();
+            }
         }
-
-        //private void GuestsDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        //{
-        //    //string aux = GuestsDataGrid.SelectedItem.ToString();
-        //    //selectedEmail = aux.Substring(10, aux.Length - 12);
-        //}
-
-        //private void AddButton_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //        UserMeeting userEmailAndProjectName = new UserMeeting()
-        //        {
-        //            Email = selectedEmail,
-        //            ProjectName = ProjectNametextBox.Text,
-        //        };
-
-        //        EmailsAdded.Add(userEmailAndProjectName);
-        //}
-
         private void GuestsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedEmail = (UserAccount)GuestsListView.SelectedItem;
@@ -236,74 +230,32 @@ namespace Meetings_Manager_App
 
 
                 EmailsAdded.Add(userEmailAndProjectName);
-                
-                Grid grid = new Grid();
-
-                ColumnDefinition column1 = new ColumnDefinition();
-                ColumnDefinition column2 = new ColumnDefinition();
-
-                column1.Width = new GridLength(250);
-                column2.Width = new GridLength(50);
-
-                grid.ColumnDefinitions.Add(column1);
-                grid.ColumnDefinitions.Add(column2);
-                
-
-                TextBlock textBlock = new TextBlock();
-                textBlock.Text = userEmailAndProjectName.Email;
-                textBlock.FontSize = 15;
-                textBlock.VerticalAlignment = VerticalAlignment.Center;
-
-                PackIconMaterial packIcon = new PackIconMaterial();
-                packIcon.Kind = PackIconMaterialKind.Close;
-
-                Button deleteButton = new Button();
-
-                deleteButton.BorderBrush = null;
-                deleteButton.BorderThickness = new Thickness(0);
-                deleteButton.Content = packIcon;
-                deleteButton.Click += DeleteButton_Click;
-                deleteButton.VerticalAlignment = VerticalAlignment.Center;
-                deleteButton.Background = null;
-                deleteButton.DataContext = textBlock.Text;
-
-                    
-                deleteButton.Click += (sender3, e3) =>
-                {
-                    if (stackPanel.Children.Contains(grid))
-                    {
-                        stackPanel.Children.Remove(grid);
-                    }
-                };
-
-                grid.Children.Add(textBlock);
-                grid.Children.Add(deleteButton);
-
-                Grid.SetColumn(textBlock, 0);
-                Grid.SetColumn(deleteButton, 1);
-
-                grid.Background = new  SolidColorBrush(Color.FromArgb(0xFF, 0xd4, 0xd4, 0xd8));
-                stackPanel.Children.Add(grid);
+                showEmailsAdded(userEmailAndProjectName.Email);
             }
         }
-
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+
             if (sender is Button button && button.DataContext is string text)
             {
-                foreach(var item in EmailsAdded)
+                foreach (var item in EmailsAdded)
                 {
-                    if(text == item.Email)
+                    if (text == item.Email)
                     {
-                       EmailsAdded.Remove(item);
+                        using (SQLiteConnection conn = new SQLiteConnection(App.UserMeetingdatabasePath))
+                        {
+                            conn.CreateTable<UserMeeting>();
+                            conn.Delete(item);
+                        }
+                        EmailsAdded.Remove(item);
                         selectedMails.Remove(item.Email);
                         break;
                     }
                 }
+                ReadDataBase();
             }
 
         }
-
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
@@ -312,6 +264,62 @@ namespace Meetings_Manager_App
             var filtredList = accounts.Where(c => c.Email.ToLower().StartsWith(searchTextBox.Text.ToLower())).ToList();
             GuestsListView.ItemsSource = filtredList;
             
+        }
+
+        private void showEmailsAdded(string email)
+        {
+
+
+             Grid grid = new Grid();
+
+            ColumnDefinition column1 = new ColumnDefinition();
+            ColumnDefinition column2 = new ColumnDefinition();
+
+            column1.Width = new GridLength(250);
+            column2.Width = new GridLength(50);
+
+            grid.ColumnDefinitions.Add(column1);
+            grid.ColumnDefinitions.Add(column2);
+            grid.Height = 25;
+            grid.Margin = new Thickness(5);
+
+
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = email;
+            textBlock.FontSize = 18;
+            textBlock.VerticalAlignment = VerticalAlignment.Center;
+            textBlock.Padding = new Thickness(10);
+
+            PackIconMaterial packIcon = new PackIconMaterial();
+            packIcon.Kind = PackIconMaterialKind.Close;
+
+            Button deleteButton = new Button();
+
+            deleteButton.BorderBrush = null;
+            deleteButton.BorderThickness = new Thickness(0);
+            deleteButton.Content = packIcon;
+            deleteButton.Click += DeleteButton_Click;
+            deleteButton.VerticalAlignment = VerticalAlignment.Center;
+            deleteButton.Background = null;
+            deleteButton.DataContext = textBlock.Text;
+
+
+            deleteButton.Click += (sender3, e3) =>
+            {
+                if (stackPanel.Children.Contains(grid))
+                {
+                    stackPanel.Children.Remove(grid);
+                }
+            };
+
+            grid.Children.Add(textBlock);
+            grid.Children.Add(deleteButton);
+
+            Grid.SetColumn(textBlock, 0);
+            Grid.SetColumn(deleteButton, 1);
+
+            grid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xa8, 0xa2, 0x9e));
+            stackPanel.Children.Add(grid);
         }
     }
 }

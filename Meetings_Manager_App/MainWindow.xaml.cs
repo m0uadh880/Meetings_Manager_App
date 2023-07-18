@@ -147,6 +147,17 @@ namespace Meetings_Manager_App
                     conn.CreateTable<Meetings>();
                     conn.Delete(selectedMeeting);
                 }
+                using (SQLiteConnection conn = new SQLiteConnection(App.UserMeetingdatabasePath))
+                {
+                    conn.CreateTable<UserMeeting>();
+                    foreach (var item in userMeeting)
+                    {
+                        if(item.ProjectName == selectedMeeting.ProjectName)
+                        {
+                            conn.Delete(item);
+                        }
+                    }
+                }
                 ReadDataBase();
             }
             

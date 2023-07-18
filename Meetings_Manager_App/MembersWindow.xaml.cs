@@ -91,10 +91,6 @@ namespace Meetings_Manager_App
         {
             List<UserAccount> userAccounts;
 
-            //string DatabaseName = "UserAccount.db";
-            //string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            //string databasePath = System.IO.Path.Combine(folderPath, DatabaseName);
-
             using (SQLiteConnection conn = new SQLiteConnection(App.UserAccountdatabasePath))
             {
                 conn.CreateTable<UserAccount>();
@@ -119,9 +115,6 @@ namespace Meetings_Manager_App
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
-                //string DatabaseName = "UserAccount.db";
-                //string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                //string databasePath = System.IO.Path.Combine(folderPath, DatabaseName);
 
                 using (SQLiteConnection conn = new SQLiteConnection(App.UserAccountdatabasePath))
                 {
