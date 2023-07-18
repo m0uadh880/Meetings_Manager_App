@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Meetings_Manager_App"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1080">
@@ -197,20 +198,37 @@
                         </Grid>
 
                         <!--Guests-->
-                            <StackPanel Grid.Row="3" Margin="20 10" Width="500" HorizontalAlignment="Left">
+                            <StackPanel Grid.Row="3" Margin="20 10" HorizontalAlignment="Left">
                             <TextBlock Text="Guests"   FontSize="20" Margin="0 0 0 8"/>
-                            <DataGrid x:Name="GuestsDataGrid" SelectionChanged="GuestsDataGrid_SelectionChanged" FontSize="15" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" RowStyle="{DynamicResource DataGridRowStyle1}" >
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding Email}" />
-                                        <DataGridTemplateColumn>
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <Button Click="AddButton_Click" Content="Add" Style="{StaticResource gridEditButton}" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                    </DataGrid.Columns>
-                             </DataGrid>
+                            
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="450"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0">
+                                    <TextBox x:Name="GuestsTextBox"
+                                             Background="#f5f5f5"
+                                             Width="400" 
+                                             Height="40"
+                                             HorizontalAlignment="Left"
+                                             TextChanged="TextBox_TextChanged"/>
+                                    <ListView x:Name="GuestsListView"
+                                              SelectionChanged="GuestsListView_SelectionChanged"
+                                              Width="auto" 
+                                              HorizontalAlignment="Left">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Email}" FontSize="20" Width="auto"/>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" x:Name="textBlockContainer" />
+
+                            </Grid>
                         </StackPanel>
 
                         <!--Description-->

@@ -52,3 +52,4 @@ C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debu
 C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\MembersWindow.baml
 C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\GuestsWindow.g.cs
 C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\obj\Debug\GuestsWindow.baml
+C:\Users\Msi Rtx\source\repos\Meetings_Manager_App\Meetings_Manager_App\bin\Debug\DotNetProjects.Input.Toolkit.dll

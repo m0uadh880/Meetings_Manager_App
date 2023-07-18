@@ -6,6 +6,11 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using TextBox = System.Windows.Controls.TextBox;
+using System.Diagnostics.Contracts;
+using System.Windows.Media;
 
 namespace Meetings_Manager_App
 {
@@ -16,9 +21,11 @@ namespace Meetings_Manager_App
         private Meetings meetings = null;
         private List<UserAccount> accounts;
         private List<Meetings> meetingsList;
-        private HashSet<UserMeeting> EmailsAdded = new HashSet<UserMeeting>();
-        string selectedEmail;
+        private List<UserMeeting> EmailsAdded = new List<UserMeeting>();
         UserMeeting userEmailAndProjectName = null;
+        UserAccount selectedEmail = new UserAccount();
+        List<string> selectedMails = new List<string>();
+
 
         public AddMeetingWindow()
         {
@@ -26,9 +33,9 @@ namespace Meetings_Manager_App
             Loaded += MainWindow_Loaded;
             ReadDataBase();
 
-            GuestsDataGrid.ItemsSource = accounts.Select(item => new {
-               Email = item.Email
-            }).ToList();
+            //GuestsDataGrid.ItemsSource = accounts.Select(item => new {
+            //   Email = item.Email
+            //}).ToList();
         }
 
         public AddMeetingWindow(Meetings meetings)
@@ -43,9 +50,9 @@ namespace Meetings_Manager_App
             StartWithtextBox.Text = meetings.Time;
             DurationtextBox.Text = meetings.Duration;
             DescriptiontextBox.Text = meetings.Description;
-            GuestsDataGrid.ItemsSource = accounts.Select(item => new {
-                Email = item.Email
-            }).ToList();
+            //GuestsDataGrid.ItemsSource = accounts.Select(item => new {
+            //    Email = item.Email
+            //}).ToList();
             SaveButton.Content = "Update";
         }
 
@@ -193,22 +200,65 @@ namespace Meetings_Manager_App
             }
         }
 
-        private void GuestsDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        //private void GuestsDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        //{
+        //    //string aux = GuestsDataGrid.SelectedItem.ToString();
+        //    //selectedEmail = aux.Substring(10, aux.Length - 12);
+        //}
+
+        //private void AddButton_Click(object sender, RoutedEventArgs e)
+        //{
+            
+        //        UserMeeting userEmailAndProjectName = new UserMeeting()
+        //        {
+        //            Email = selectedEmail,
+        //            ProjectName = ProjectNametextBox.Text,
+        //        };
+
+        //        EmailsAdded.Add(userEmailAndProjectName);
+        //}
+
+        private void GuestsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string aux = GuestsDataGrid.SelectedItem.ToString();
-            selectedEmail = aux.Substring(10, aux.Length - 12);
+            selectedEmail = (UserAccount)GuestsListView.SelectedItem;
+            if(selectedEmail != null)
+            {
+
+                if (!selectedMails.Contains(selectedEmail.Email))
+                {
+                    selectedMails.Add(selectedEmail.Email);
+
+                    UserMeeting userEmailAndProjectName = new UserMeeting()
+                    {
+                        Email = selectedEmail.Email,
+                        ProjectName = ProjectNametextBox.Text,
+                    };
+
+
+                    EmailsAdded.Add(userEmailAndProjectName);
+                    TextBlock dynamicTextBlock = new TextBlock();
+                    dynamicTextBlock.Height = 40;
+                    dynamicTextBlock.Width = 200;
+                    dynamicTextBlock.Background = new SolidColorBrush(Colors.LightGray);
+                    dynamicTextBlock.Foreground = new SolidColorBrush(Colors.Black);
+                    dynamicTextBlock.FontSize = 18;
+
+                    dynamicTextBlock.Text = userEmailAndProjectName.Email;
+                    textBlockContainer.Children.Add(dynamicTextBlock);
+                }
+                
+                
+            }
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
-                UserMeeting userEmailAndProjectName = new UserMeeting()
-                {
-                    Email = selectedEmail,
-                    ProjectName = ProjectNametextBox.Text,
-                };
 
-                EmailsAdded.Add(userEmailAndProjectName);
+            GuestsListView.ItemsSource = accounts.Select(item => item.Email) ;
+            TextBox searchTextBox = sender as TextBox;
+            var filtredList = accounts.Where(c => c.Email.ToLower().StartsWith(searchTextBox.Text.ToLower())).ToList();
+            GuestsListView.ItemsSource = filtredList;
+            
         }
     }
 }
