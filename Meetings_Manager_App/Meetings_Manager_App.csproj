@@ -96,17 +96,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddNewMeetingPage.xaml.cs">
+      <DependentUpon>AddNewMeetingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Classes\Meetings.cs" />
     <Compile Include="Classes\UserAccount.cs" />
     <Compile Include="Classes\UserMeeting.cs" />
     <Compile Include="CreateAccount.xaml.cs">
       <DependentUpon>CreateAccount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GuestsWindow.xaml.cs">
-      <DependentUpon>GuestsWindow.xaml</DependentUpon>
+    <Compile Include="MeetingsPage.xaml.cs">
+      <DependentUpon>MeetingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MembersWindow.xaml.cs">
-      <DependentUpon>MembersWindow.xaml</DependentUpon>
+    <Compile Include="MembersPage.xaml.cs">
+      <DependentUpon>MembersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ShowGuests.xaml.cs">
       <DependentUpon>ShowGuests.xaml</DependentUpon>
@@ -114,15 +117,11 @@
     <Compile Include="UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddMeetingWindow.xaml">
+    <Page Include="AddNewMeetingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateAccount.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="GuestsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -134,9 +133,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AddMeetingWindow.xaml.cs">
-      <DependentUpon>AddMeetingWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -148,7 +144,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MembersWindow.xaml">
+    <Page Include="MeetingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MembersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

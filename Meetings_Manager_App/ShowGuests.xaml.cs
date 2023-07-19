@@ -10,6 +10,8 @@ namespace Meetings_Manager_App
     
     public partial class ShowGuests : Page
     {
+        private Frame mainFrame;
+
         public ShowGuests(List<UserMeeting> userMeeting)
         {
             InitializeComponent();
@@ -19,10 +21,16 @@ namespace Meetings_Manager_App
             });
         }
 
-        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        public void SetMainFrame(Frame frame)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            mainFrame = frame;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            MeetingsPage meetingsPage = new MeetingsPage();
+            meetingsPage.SetMainFrame(mainFrame);
+            mainFrame.Navigate(meetingsPage);
         }
     }
 }

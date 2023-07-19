@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using Meetings_Manager_App.Classes;
 using System.Linq;
 using System ;
+using System.Windows.Media;
+using Meetings_Manager_App.Properties;
+using Button = System.Windows.Controls.Button;
+
 
 namespace Meetings_Manager_App
 {
@@ -18,22 +22,18 @@ namespace Meetings_Manager_App
         private UserAccount userAccount;
         private List<UserMeeting> userMeeting;
         private List<UserMeeting> GuestesEmailsOfSelectedProject;
-
-
+        private Button lastClickedButton;
         public MainWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
-
-            ReadDataBase();
+            MeetingsButton_Click(MeetingsButton, null);
         }
 
         public MainWindow(UserAccount userAccount)
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
-
-            ReadDataBase();
 
             userAccount = new UserAccount();
             this.userAccount = userAccount;
@@ -78,12 +78,22 @@ namespace Meetings_Manager_App
         
         private void AddNewMeeeting_Click(object sender, RoutedEventArgs e)
         {
-            AddMeetingWindow addMeetingWindow = new AddMeetingWindow();
-            
-            addMeetingWindow.Show();
-            ReadDataBase();
-            Close();
+            Button clickedButton = (Button)sender;
 
+            if (lastClickedButton != null)
+            {
+                lastClickedButton.Background = null;
+                lastClickedButton.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xEA, 0x58, 0x0C));
+            }
+
+            AddMeetingsButton.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xEA, 0x58, 0x0C));
+            AddMeetingsButton.Foreground = new SolidColorBrush(Colors.White);
+
+            lastClickedButton = clickedButton;
+
+            AddNewMeetingPage addNewMeetingPage = new AddNewMeetingPage();
+            addNewMeetingPage.SetMainFrame(mainFrame);
+            mainFrame.Navigate(addNewMeetingPage);
         }
 
         private void Logout_Click(object sender, RoutedEventArgs e)
@@ -98,94 +108,44 @@ namespace Meetings_Manager_App
             }
         }
 
-        void ReadDataBase()
-        {
-            List<Meetings> meetings = new List<Meetings>();
-            using (SQLiteConnection conn = new SQLiteConnection(App.MeetingsdatabasePath))
-            {
-                conn.CreateTable<Meetings>();
-                meetings = conn.Table<Meetings>().ToList();
-            }
-
-            if (meetings != null)
-            {
-                MeetingsDataGrid.ItemsSource = meetings;
-            }
-
-            using (SQLiteConnection connection = new SQLiteConnection(App.UserMeetingdatabasePath))
-            {
-                connection.CreateTable<UserMeeting>();
-                userMeeting = connection.Table<UserMeeting>().ToList();
-            }
-
-        }
-
-        private void MeetingsDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            selectedMeeting = new Meetings();
-            selectedMeeting = (Meetings)MeetingsDataGrid.SelectedItem;
-        }
-
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (selectedMeeting != null)
-            {
-                AddMeetingWindow updateMeetingWindow = new AddMeetingWindow(selectedMeeting);
-                updateMeetingWindow.Show();
-                Close();
-            }
-        }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e) 
-        {
-            DialogResult result = System.Windows.Forms.MessageBox.Show("Are you sure ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == System.Windows.Forms.DialogResult.Yes)
-            {
-                using (SQLiteConnection conn = new SQLiteConnection(App.MeetingsdatabasePath))
-                {
-                    conn.CreateTable<Meetings>();
-                    conn.Delete(selectedMeeting);
-                }
-                using (SQLiteConnection conn = new SQLiteConnection(App.UserMeetingdatabasePath))
-                {
-                    conn.CreateTable<UserMeeting>();
-                    foreach (var item in userMeeting)
-                    {
-                        if(item.ProjectName == selectedMeeting.ProjectName)
-                        {
-                            conn.Delete(item);
-                        }
-                    }
-                }
-                ReadDataBase();
-            }
-            
-        }
-
         private void MembersButton_Click(object sender, RoutedEventArgs e)
         {
-            MembersWindow membersWindow = new MembersWindow();
-            membersWindow.Show();
-            Close();
+            Button clickedButton = (Button)sender;
+
+            if (lastClickedButton != null)
+            {
+                lastClickedButton.Background = null;
+                lastClickedButton.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xEA, 0x58, 0x0C));
+            }
+
+            clickedButton.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xEA, 0x58, 0x0C));
+            clickedButton.Foreground = new SolidColorBrush(Colors.White);
+
+            lastClickedButton = clickedButton;
+
+            MembersPage membersPage = new MembersPage();
+            membersPage.SetMainFrame(mainFrame);
+            mainFrame.Navigate(membersPage);
         }
 
-        private void ShowGuestsButton_Click(object sender, RoutedEventArgs e)
+        private void MeetingsButton_Click(object sender, RoutedEventArgs e)
         {
-            string projectName = selectedMeeting.ProjectName;
-            if (projectName != null) {
+            Button clickedButton = (Button)sender;
 
-                GuestesEmailsOfSelectedProject = new List<UserMeeting>();
-                GuestesEmailsOfSelectedProject = userMeeting.Where(item => item.ProjectName == projectName).ToList();
-
-                //mainFrame.Navigate(new Uri("ShowGuests.xaml", UriKind.Relative), GuestesEmailsOfSelectedProject);
-                //ShowGuests showGuests = new ShowGuests(GuestesEmailsOfSelectedProject);
-                //mainFrame.Navigate(showGuests);
-
-                GuestsWindow guestsWindow = new GuestsWindow(GuestesEmailsOfSelectedProject);
-                guestsWindow.Show();
+            if (lastClickedButton != null)
+            {
+                lastClickedButton.Background = null;
+                lastClickedButton.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xEA, 0x58, 0x0C));
             }
+
+            MeetingsButton.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xEA, 0x58, 0x0C));
+            MeetingsButton.Foreground = new SolidColorBrush(Colors.White);
+
+            lastClickedButton = clickedButton;
+
+            MeetingsPage meetingsPage = new MeetingsPage();
+            meetingsPage.SetMainFrame(mainFrame);
+            mainFrame.Navigate(meetingsPage);
         }
     }
-
 }

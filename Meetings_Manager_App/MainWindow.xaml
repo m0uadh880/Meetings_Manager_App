@@ -33,7 +33,7 @@
                         </Border>
 
                         <!--Menu Titles-->
-                        <TextBlock x:Name="AdminNameTextBlock" Foreground="#fed7aa" FontSize="22" FontWeight="SemiBold" DockPanel.Dock="Top" Margin="5 25 0 10" TextAlignment="Center"/>
+                        <TextBlock x:Name="AdminNameTextBlock" Text="Admin" Foreground="#fed7aa" FontSize="22" FontWeight="SemiBold" DockPanel.Dock="Top" Margin="5 25 0 10" TextAlignment="Center"/>
                         <TextBlock Text="Tataouine, Tunisia" Foreground="#ea580c" FontSize="14" FontWeight="SemiBold" DockPanel.Dock="Top" TextAlignment="Center"/>
 
                         <!--Menu Seprator-->
@@ -48,21 +48,21 @@
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" Background="#ea580c" Foreground="White">
+                            <Button x:Name="MeetingsButton" Style="{StaticResource menuButton}" Click="MeetingsButton_Click" >
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="CalendarClock" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Meetings" />
                                 </StackPanel>
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" Click="AddNewMeeeting_Click">
+                            <Button x:Name="AddMeetingsButton" Style="{StaticResource menuButton}" Click="AddNewMeeeting_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="Plus" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Add New Meeting"/>
                                 </StackPanel>
                             </Button>
 
-                            <Button Click="MembersButton_Click" Style="{StaticResource menuButton}" >
+                            <Button x:Name="MembersButton" Click="MembersButton_Click" Style="{StaticResource menuButton}" >
                                 <StackPanel Orientation="Horizontal">
                                     <Icon:PackIconMaterial Kind="AccountMultipleOutline" Style="{StaticResource menuButtonIcon}"/>
                                     <TextBlock Text="Members"/>
@@ -83,69 +83,7 @@
             </Grid>
 
             <!--Main Section-->
-            <Grid Grid.Column="1" Margin="30 20 20 20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-
-                <!--Top Buttons-->
-                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" >
-                    <Icon:PackIconMaterial Kind="Cog"/>
-                </Button>
-
-                <Button Style="{StaticResource topButton}" Margin="0 0 55 0">
-                    <Icon:PackIconMaterial Kind="Bell"/>
-                </Button>
-
-                <!--Page Title-->
-                <TextBlock Text="Meetings" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0" Foreground="#121518" HorizontalAlignment="Left"/>
-
-                
-
-                <!--Seprator-->
-                <Separator Height="1" Grid.Row="3" Background="#1e1b4b" Margin="0 -1 0 10"/>
-
-                <!--Members Data Grid-->
-                <DataGrid FontSize="15"  SelectionChanged="MeetingsDataGrid_SelectionChanged"  Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="MeetingsDataGrid">
-                    <DataGrid.Columns>
-                        <!--<DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>-->
-                        <DataGridTextColumn Header="Project Name" Binding="{Binding ProjectName}" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Date and Time" Binding="{Binding DateAndTime}" IsReadOnly="True" Width="*"/>
-                        <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" IsReadOnly="True" Width="*"/>
-                        <DataGridTemplateColumn Header="Guests" IsReadOnly="True" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Click="ShowGuestsButton_Click" Background="DarkOrange" Content="show guests" Style="{StaticResource gridEditButton}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" IsReadOnly="True" Width="*"/>
-                        <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Click="UpdateButton_Click" Style="{StaticResource gridEditButton}">
-                                            Update
-                                            <!--<Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>-->
-                                        </Button>
-                                        <Button Click="DeleteButton_Click" Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
-                                            Delete
-                                            <!--<Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>-->
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            <Frame x:Name="mainFrame" Grid.Column="1" />
-            </Grid>
+            <Frame x:Name="mainFrame" Grid.Column="1" NavigationUIVisibility="Hidden" />
         </Grid>
     </Border>
 </Window>
