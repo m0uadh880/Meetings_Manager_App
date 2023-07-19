@@ -142,7 +142,9 @@
                                 </ListView>
                             </StackPanel>
 
-                            <StackPanel Grid.Column="1" x:Name="stackPanel" />
+                            <ScrollViewer Height="100" Grid.Column="1" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top">
+                                <StackPanel   x:Name="stackPanel" />
+                            </ScrollViewer>
 
                         </Grid>
                     </StackPanel>

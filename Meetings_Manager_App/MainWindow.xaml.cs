@@ -147,5 +147,6 @@ namespace Meetings_Manager_App
             meetingsPage.SetMainFrame(mainFrame);
             mainFrame.Navigate(meetingsPage);
         }
+
     }
 }

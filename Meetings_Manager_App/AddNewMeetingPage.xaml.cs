@@ -287,4 +287,5 @@ namespace Meetings_Manager_App
             mainFrame = frame;
         }
     }
+
 }
