@@ -10,7 +10,6 @@ using System.Windows.Controls;
 using TextBox = System.Windows.Controls.TextBox;
 using System.Windows.Media;
 using Button = System.Windows.Controls.Button;
-using System;
 using MahApps.Metro.IconPacks;
 
 namespace Meetings_Manager_App
@@ -346,5 +345,6 @@ namespace Meetings_Manager_App
             grid.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xa8, 0xa2, 0x9e));
             stackPanel.Children.Add(grid);
         }
+
     }
 }

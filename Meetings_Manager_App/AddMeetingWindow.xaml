@@ -18,7 +18,7 @@
         <Border Background="#d6d3d1" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="230"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
@@ -213,7 +213,8 @@
                                              Width="400" 
                                              Height="40"
                                              HorizontalAlignment="Left"
-                                             TextChanged="TextBox_TextChanged"/>
+                                             TextChanged="TextBox_TextChanged"
+                                             />
                                     <ListView x:Name="GuestsListView"
                                               SelectionChanged="GuestsListView_SelectionChanged"
                                               Width="auto" 

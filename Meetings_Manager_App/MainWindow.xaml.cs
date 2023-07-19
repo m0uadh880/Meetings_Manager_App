@@ -6,7 +6,7 @@ using SQLite;
 using System.Collections.Generic;
 using Meetings_Manager_App.Classes;
 using System.Linq;
-using System;
+using System ;
 
 namespace Meetings_Manager_App
 {
@@ -14,10 +14,10 @@ namespace Meetings_Manager_App
     public partial class MainWindow : Window
     {
 
-        Meetings selectedMeeting = new Meetings();
-        UserAccount userAccount;
+        private Meetings selectedMeeting;
+        private UserAccount userAccount;
         private List<UserMeeting> userMeeting;
-        private List<UserMeeting> GuestesEmailsOfSelectedProject = new List<UserMeeting>();
+        private List<UserMeeting> GuestesEmailsOfSelectedProject;
 
 
         public MainWindow()
@@ -27,12 +27,15 @@ namespace Meetings_Manager_App
 
             ReadDataBase();
         }
+
         public MainWindow(UserAccount userAccount)
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
 
             ReadDataBase();
+
+            userAccount = new UserAccount();
             this.userAccount = userAccount;
             AdminNameTextBlock.Text = userAccount.Username;
         }
@@ -72,7 +75,7 @@ namespace Meetings_Manager_App
                 this.DragMove();
             }
         }
-
+        
         private void AddNewMeeeting_Click(object sender, RoutedEventArgs e)
         {
             AddMeetingWindow addMeetingWindow = new AddMeetingWindow();
@@ -86,7 +89,6 @@ namespace Meetings_Manager_App
         private void Logout_Click(object sender, RoutedEventArgs e)
         {
             DialogResult result = System.Windows.Forms.MessageBox.Show("Are you sure ?", "Confirmation", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            
 
             if (result == System.Windows.Forms.DialogResult.Yes)
             {
@@ -98,7 +100,7 @@ namespace Meetings_Manager_App
 
         void ReadDataBase()
         {
-            List<Meetings> meetings;
+            List<Meetings> meetings = new List<Meetings>();
             using (SQLiteConnection conn = new SQLiteConnection(App.MeetingsdatabasePath))
             {
                 conn.CreateTable<Meetings>();
@@ -120,6 +122,7 @@ namespace Meetings_Manager_App
 
         private void MeetingsDataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            selectedMeeting = new Meetings();
             selectedMeeting = (Meetings)MeetingsDataGrid.SelectedItem;
         }
 
@@ -172,6 +175,7 @@ namespace Meetings_Manager_App
             string projectName = selectedMeeting.ProjectName;
             if (projectName != null) {
 
+                GuestesEmailsOfSelectedProject = new List<UserMeeting>();
                 GuestesEmailsOfSelectedProject = userMeeting.Where(item => item.ProjectName == projectName).ToList();
 
                 //mainFrame.Navigate(new Uri("ShowGuests.xaml", UriKind.Relative), GuestesEmailsOfSelectedProject);
