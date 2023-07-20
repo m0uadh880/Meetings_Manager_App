@@ -1,20 +1,11 @@
 ﻿using MahApps.Metro.IconPacks;
 using Meetings_Manager_App.Classes;
 using SQLite;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Meetings_Manager_App
 {
@@ -219,12 +210,9 @@ namespace Meetings_Manager_App
         }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
-            GuestsListView.ItemsSource = accounts.Select(item => item.Email);
             TextBox searchTextBox = sender as TextBox;
             var filtredList = accounts.Where(c => c.Email.ToLower().StartsWith(searchTextBox.Text.ToLower())).ToList();
             GuestsListView.ItemsSource = filtredList;
-
         }
 
         private void showEmailsAdded(string email)
@@ -285,6 +273,18 @@ namespace Meetings_Manager_App
         public void SetMainFrame(Frame frame)
         {
             mainFrame = frame;
+        }
+
+        private void GuestsTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox searchTextBox = sender as TextBox;
+            var filtredList = accounts.Where(c => c.Email.ToLower().StartsWith(searchTextBox.Text.ToLower())).ToList();
+            GuestsListView.ItemsSource = filtredList;
+        }
+
+        private void GuestsTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            GuestsListView.ItemsSource = null;
         }
     }
 

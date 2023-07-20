@@ -129,20 +129,20 @@
                                              Height="40"
                                              HorizontalAlignment="Left"
                                              TextChanged="TextBox_TextChanged"
+                                             GotFocus="GuestsTextBox_GotFocus"
+                                             LostFocus="GuestsTextBox_LostFocus"
                                              />
-                                <ScrollViewer Height="150" VerticalScrollBarVisibility="Auto" >
                                     <ListView x:Name="GuestsListView"
                                               SelectionChanged="GuestsListView_SelectionChanged"
                                               Width="auto" 
-                                              HorizontalAlignment="Left">
+                                              HorizontalAlignment="Left"
+                                              Background="#bdbdbd">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding Email}" FontSize="20" Width="auto"/>
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
-                                </ScrollViewer>
-                               
                             </StackPanel>
 
                             <ScrollViewer Height="150" Grid.Column="1" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top">
