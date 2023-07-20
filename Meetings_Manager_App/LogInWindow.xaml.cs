@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Media;
 using Meetings_Manager_App.Classes;
 using SQLite;
 
@@ -60,11 +61,24 @@ namespace Meetings_Manager_App
             else
             {
                 if(EmailInput == "" && passwordInput == "")
-                    System.Windows.MessageBox.Show("Email and password are empty.", "Invalid Credentials", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
-                else if (EmailInput == "" )
-                    System.Windows.MessageBox.Show("Email is empty.", "Invalid Credentials", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
+                {
+                    EmailtextBox.BorderBrush = Brushes.Red;
+                    EmailtextBlock.Foreground = new SolidColorBrush(Colors.Red);
+
+                    PasswordtextBox.BorderBrush = Brushes.Red;
+                    PasswordTextBlock.Foreground = new SolidColorBrush(Colors.Red);
+
+                }
+                else if (EmailInput == "")
+                {
+                    EmailtextBox.BorderBrush = Brushes.Red;
+                    EmailtextBlock.Foreground = new SolidColorBrush(Colors.Red);
+                }
                 else
-                    System.Windows.MessageBox.Show("password is empty.", "Invalid Credentials", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
+                {
+                    PasswordtextBox.BorderBrush = Brushes.Red;
+                    PasswordTextBlock.Foreground = new SolidColorBrush(Colors.Red);
+                }
 
 
             }
@@ -75,7 +89,6 @@ namespace Meetings_Manager_App
         {
             CreateAccount createAccount = new CreateAccount();
             createAccount.Show();
-            Close();
         }
 
         void ReadDataBase()
@@ -104,9 +117,11 @@ namespace Meetings_Manager_App
 
         private void EmailtextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (EmailtextBox.Text == "Enter Email")
+            if (EmailtextBlock.Text == "Enter Email")
             {
-                EmailtextBox.Text = string.Empty;
+                EmailtextBox.BorderBrush = Brushes.Black;
+                EmailtextBlock.Foreground = new SolidColorBrush(Colors.Black);
+                EmailtextBlock.Text = string.Empty;
             }
         }
 
@@ -114,7 +129,7 @@ namespace Meetings_Manager_App
         {
             if (string.IsNullOrWhiteSpace(EmailtextBox.Text))
             {
-                EmailtextBox.Text = "Enter Email";
+                EmailtextBlock.Text = "Enter Email";
             }
         }
 
@@ -122,6 +137,8 @@ namespace Meetings_Manager_App
         {
             if (PasswordTextBlock.Text == "Enter Password")
             {
+                PasswordtextBox.BorderBrush = Brushes.Black;
+                PasswordTextBlock.Foreground = new SolidColorBrush(Colors.Black);
                 PasswordTextBlock.Text = string.Empty;
             }
         }

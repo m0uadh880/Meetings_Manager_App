@@ -75,7 +75,7 @@ namespace Meetings_Manager_App
 
             if (lastClickedButton != null)
             {
-                lastClickedButton.Background = null;
+                lastClickedButton.Background = new SolidColorBrush(Colors.Transparent);
                 lastClickedButton.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xEA, 0x58, 0x0C));
             }
 
@@ -107,7 +107,7 @@ namespace Meetings_Manager_App
 
             if (lastClickedButton != null)
             {
-                lastClickedButton.Background = null;
+                lastClickedButton.Background = new SolidColorBrush(Colors.Transparent);
                 lastClickedButton.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xEA, 0x58, 0x0C));
             }
 
@@ -127,7 +127,7 @@ namespace Meetings_Manager_App
 
             if (lastClickedButton != null)
             {
-                lastClickedButton.Background = null;
+                lastClickedButton.Background = new SolidColorBrush(Colors.Transparent);
                 lastClickedButton.Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0xEA, 0x58, 0x0C));
             }
 

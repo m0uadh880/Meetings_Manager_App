@@ -65,11 +65,9 @@
                             <PasswordBox x:Name="ConfirmPasswordTextBox"/>
                         </StackPanel>
                         <StackPanel Grid.Row="5">
-                            <Button Content="Create your account" Click="CreateButton_Click" Style="{StaticResource SignInButton}"   BorderBrush="#688E9B" Background="#688E9B" Foreground="White" Margin=" 0 10 0 10" FontSize="15" FontWeight="SemiBold"/>
+                            <Button Content="Create your account" Click="CreateButton_Click" Style="{StaticResource SignInButton}" Margin=" 0 10 0 10" FontSize="15" FontWeight="SemiBold"/>
                         </StackPanel>
                     </Grid>
-                    
-                    
                 </Border>
             </Grid>
         </Grid>

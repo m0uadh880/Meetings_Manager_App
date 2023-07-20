@@ -44,7 +44,8 @@
                         
                         <!--Email TextBox-->
                         <Grid>
-                            <TextBox x:Name="EmailtextBox" Foreground="Black" Text="Enter Email" GotFocus="EmailtextBox_GotFocus" LostFocus="EmailtextBox_LostFocus"  FontSize="13" Padding="31 9 0 9" Margin="0 5" />
+                            <TextBlock x:Name="EmailtextBlock"  Text="Enter Email" Margin="33 15 0 0" />
+                            <TextBox x:Name="EmailtextBox" GotFocus="EmailtextBox_GotFocus" LostFocus="EmailtextBox_LostFocus"  FontSize="13" Padding="31 9 0 9" Margin="0 5" />
 
                             <Icon:PackIconMaterial Kind="EmailVariant" Width="15" 
                                                    VerticalAlignment="Center" Margin="10 0 0 0"/>
@@ -68,7 +69,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Button Content="Sign in" Click="Signin_Click" Style="{StaticResource SignInButton}" Margin="0 0 5 0"  BorderBrush="#688E9B" Background="#688E9B" Foreground="White"/>
+                            <Button Content="Sign in" Click="Signin_Click" Style="{StaticResource SignInButton}" Margin="0 0 5 0"/>
                             <Button Content="Create account" Click="Create_account_Click" Style="{StaticResource MainButtonLong}" Margin="5 0 0 0" Grid.Column="1"/>
                         </Grid> 
                     </StackPanel>
