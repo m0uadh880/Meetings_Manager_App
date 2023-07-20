@@ -130,19 +130,22 @@
                                              HorizontalAlignment="Left"
                                              TextChanged="TextBox_TextChanged"
                                              />
-                                <ListView x:Name="GuestsListView"
+                                <ScrollViewer Height="150" VerticalScrollBarVisibility="Auto" >
+                                    <ListView x:Name="GuestsListView"
                                               SelectionChanged="GuestsListView_SelectionChanged"
                                               Width="auto" 
                                               HorizontalAlignment="Left">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Email}" FontSize="20" Width="auto"/>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Email}" FontSize="20" Width="auto"/>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </ScrollViewer>
+                               
                             </StackPanel>
 
-                            <ScrollViewer Height="100" Grid.Column="1" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top">
+                            <ScrollViewer Height="150" Grid.Column="1" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top">
                                 <StackPanel   x:Name="stackPanel" />
                             </ScrollViewer>
 

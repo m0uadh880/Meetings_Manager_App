@@ -44,15 +44,15 @@
                         
                         <!--Email TextBox-->
                         <Grid>
-                            <TextBox x:Name="EmailtextBox" FontSize="13" Padding="31 9 0 9" Margin="0 5" />
+                            <TextBox x:Name="EmailtextBox" Foreground="Black" Text="Enter Email" GotFocus="EmailtextBox_GotFocus" LostFocus="EmailtextBox_LostFocus"  FontSize="13" Padding="31 9 0 9" Margin="0 5" />
 
                             <Icon:PackIconMaterial Kind="EmailVariant" Width="15" 
                                                    VerticalAlignment="Center" Margin="10 0 0 0"/>
-                            
                         </Grid>
                         <!--Password TextBox-->
                         <Grid>
-                            <PasswordBox x:Name="PasswordtextBox" FontSize="13" Padding="31 9 0 9" Margin="0 5" />
+                            <TextBlock x:Name="PasswordTextBlock"  Text="Enter Password" Margin="33 15 0 0" />
+                            <PasswordBox x:Name="PasswordtextBox" FontSize="13" Padding="31 9 0 9" Margin="0 5" GotFocus="PasswordTextBox_GotFocus" LostFocus="PasswordTextBox_LostFocus" />
 
                             <Icon:PackIconMaterial Kind="LockOutline" Width="15" 
                                                    VerticalAlignment="Center" Margin="10 0 0 0"/>

@@ -1,16 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Forms;
-using SQLite;
 using System.Collections.Generic;
 using Meetings_Manager_App.Classes;
-using System.Linq;
-using System ;
 using System.Windows.Media;
-using Meetings_Manager_App.Properties;
 using Button = System.Windows.Controls.Button;
-
 
 namespace Meetings_Manager_App
 {
@@ -18,15 +12,14 @@ namespace Meetings_Manager_App
     public partial class MainWindow : Window
     {
 
-        private Meetings selectedMeeting;
         private UserAccount userAccount;
         private List<UserMeeting> userMeeting;
-        private List<UserMeeting> GuestesEmailsOfSelectedProject;
         private Button lastClickedButton;
         public MainWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+
             MeetingsButton_Click(MeetingsButton, null);
         }
 

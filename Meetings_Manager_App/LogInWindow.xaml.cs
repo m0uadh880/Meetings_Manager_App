@@ -11,16 +11,12 @@ namespace Meetings_Manager_App
     public partial class LogInWindow : Window
     {
         List<UserAccount> userAccounts;
-
         public LogInWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
-
             userAccounts = new List<UserAccount>();
-
             ReadDataBase();
-            
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -104,6 +100,38 @@ namespace Meetings_Manager_App
             Admin1.Email = "admin@gmail.com";
             Admin1.Password = "admin";
             userAccounts.Add(Admin1);
+        }
+
+        private void EmailtextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (EmailtextBox.Text == "Enter Email")
+            {
+                EmailtextBox.Text = string.Empty;
+            }
+        }
+
+        private void EmailtextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(EmailtextBox.Text))
+            {
+                EmailtextBox.Text = "Enter Email";
+            }
+        }
+
+        private void PasswordTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordTextBlock.Text == "Enter Password")
+            {
+                PasswordTextBlock.Text = string.Empty;
+            }
+        }
+
+        private void PasswordTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(PasswordtextBox.Password))
+            {
+                PasswordTextBlock.Text = "Enter Password";
+            }
         }
     }
 }

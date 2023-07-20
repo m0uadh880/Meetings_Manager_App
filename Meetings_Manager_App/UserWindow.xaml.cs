@@ -25,16 +25,17 @@ namespace Meetings_Manager_App
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
-            this.user = user;
-            UserNameTextBlock.Text = user.Username;
+            user = new UserAccount();
+            meetings = new List<Meetings>();
+            userMeetings = new List<UserMeeting>();
+            lastClickedButton = new Button();
             ReadMeetingsDataBase();
 
-            
+            this.user = user;
+            UserNameTextBlock.Text = user.Username;
 
             var projectNames = userMeetings.Where(a => a.Email == user.Email).Select(item => item.ProjectName);
             ButtonsItemControl.ItemsSource = projectNames;
-
-
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

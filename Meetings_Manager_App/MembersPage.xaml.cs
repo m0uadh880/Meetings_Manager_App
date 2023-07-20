@@ -10,7 +10,7 @@ namespace Meetings_Manager_App
 {
     public partial class MembersPage : Page
     {
-        private UserAccount selectedMeeting = new UserAccount();
+        private UserAccount selectedMeeting;
         private Frame mainFrame;
 
         public MembersPage()
@@ -37,6 +37,7 @@ namespace Meetings_Manager_App
         }
         private void MembersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            selectedMeeting = new UserAccount();
             selectedMeeting = (UserAccount)MembersDataGrid.SelectedItem;
 
         }
@@ -58,6 +59,7 @@ namespace Meetings_Manager_App
         }
         public void SetMainFrame(Frame frame)
         {
+            mainFrame = new Frame();
             mainFrame = frame;
         }
     }

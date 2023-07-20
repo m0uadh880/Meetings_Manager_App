@@ -23,6 +23,7 @@ namespace Meetings_Manager_App
 
         public void SetMainFrame(Frame frame)
         {
+            mainFrame = new Frame();
             mainFrame = frame;
         }
 
