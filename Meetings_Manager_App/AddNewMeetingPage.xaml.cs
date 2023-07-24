@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Xceed.Wpf.Toolkit;
 
 namespace Meetings_Manager_App
 {
@@ -40,7 +41,7 @@ namespace Meetings_Manager_App
             this.meetings = meetings;
             ProjectNametextBox.Text = meetings.ProjectName;
             DatetextBox.Text = meetings.Date;
-            //StartWithtextBox.Text = meetings.Time;
+            TimePicker.Text = meetings.Time;
             //DurationtextBox.Text = meetings.Duration;
             DescriptiontextBox.Text = meetings.Description;
             selectedMails.Clear();
@@ -61,10 +62,11 @@ namespace Meetings_Manager_App
         private void AddMeetingButton_Click(object sender, RoutedEventArgs e)
         {
 
-            if (SaveButton.Content == "Update")
+            if ((string)SaveButton.Content == "Update")
             {
                 meetings.ProjectName = ProjectNametextBox.Text;
                 meetings.Date = DatetextBox.Text;
+                meetings.Time = TimePicker.Text;
                 //meetings.Time = StartWithtextBox.Text;
                 //meetings.Duration = DurationtextBox.Text;
                 meetings.Description = DescriptiontextBox.Text;
@@ -94,7 +96,7 @@ namespace Meetings_Manager_App
                 {
                     ProjectName = ProjectNametextBox.Text,
                     Date = DatetextBox.Text,
-                    Time = Time_combobox.Text + " " + AMorPM_combobox.Text,
+                    Time = TimePicker.Text,
                     Duration = hoursIntegerUpDown.Text + "h and " + minutesIntegerUpDown.Text + "min",
                     Description = DescriptiontextBox.Text,
                 };
