@@ -38,14 +38,19 @@
 
             <!--Members Data Grid-->
             <StackPanel Grid.Row="5" Width="500" HorizontalAlignment="Left">
-                <ListView x:Name="GuestsListView" Background="#d6d3d1"
+                <!--<ListView x:Name="GuestsListView" Background="#d6d3d1"
                   Margin="0 10 0 0">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Email}" FontSize="20"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                </ListView>
+                </ListView>-->
+                <DataGrid FontSize="20" x:Name="GuestsDataGrid" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" RowStyle="{DynamicResource DataGridRowStyle1}" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" IsReadOnly="True" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
                 <Button Content="Back" Margin="10" Width="50" Background="White" FontWeight="SemiBold"  HorizontalAlignment="Right" Click="BackButton_Click" Height="30" />
             </StackPanel>
         </Grid>

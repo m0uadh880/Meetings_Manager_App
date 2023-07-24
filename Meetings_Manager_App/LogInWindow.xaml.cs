@@ -49,12 +49,12 @@ namespace Meetings_Manager_App
                     }
                     else
                     {
-                        System.Windows.MessageBox.Show("Email or password is incorrect.", "Invalid Credentials", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
+                        System.Windows.MessageBox.Show("Incorrect Email or password", "Invalid Credentials", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception)
                 {
-                    System.Windows.MessageBox.Show("Email or password is incorrect.", "Invalid Credentials", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
+                    System.Windows.MessageBox.Show("Incorrect Email or password", "Invalid Credentials", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
                 }
                 
             }
@@ -63,9 +63,11 @@ namespace Meetings_Manager_App
                 if(EmailInput == "" && passwordInput == "")
                 {
                     EmailtextBox.BorderBrush = Brushes.Red;
+                    EmailIcon.Foreground = new SolidColorBrush(Colors.Red);
                     EmailtextBlock.Foreground = new SolidColorBrush(Colors.Red);
 
                     PasswordtextBox.BorderBrush = Brushes.Red;
+                    PasswordIcon.Foreground = new SolidColorBrush(Colors.Red);
                     PasswordTextBlock.Foreground = new SolidColorBrush(Colors.Red);
 
                 }
@@ -120,6 +122,7 @@ namespace Meetings_Manager_App
             if (EmailtextBlock.Text == "Enter Email")
             {
                 EmailtextBox.BorderBrush = Brushes.Black;
+                EmailIcon.Foreground = new SolidColorBrush(Colors.Black);
                 EmailtextBlock.Foreground = new SolidColorBrush(Colors.Black);
                 EmailtextBlock.Text = string.Empty;
             }
@@ -138,6 +141,7 @@ namespace Meetings_Manager_App
             if (PasswordTextBlock.Text == "Enter Password")
             {
                 PasswordtextBox.BorderBrush = Brushes.Black;
+                PasswordIcon.Foreground = new SolidColorBrush(Colors.Black);
                 PasswordTextBlock.Foreground = new SolidColorBrush(Colors.Black);
                 PasswordTextBlock.Text = string.Empty;
             }

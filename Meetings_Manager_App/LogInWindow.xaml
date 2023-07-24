@@ -48,7 +48,8 @@
                             <TextBox x:Name="EmailtextBox" GotFocus="EmailtextBox_GotFocus" LostFocus="EmailtextBox_LostFocus"  FontSize="13" Padding="31 9 0 9" Margin="0 5" />
 
                             <Icon:PackIconMaterial Kind="EmailVariant" Width="15" 
-                                                   VerticalAlignment="Center" Margin="10 0 0 0"/>
+                                                   VerticalAlignment="Center" Margin="10 0 0 0"
+                                                   x:Name="EmailIcon"/>
                         </Grid>
                         <!--Password TextBox-->
                         <Grid>
@@ -56,7 +57,8 @@
                             <PasswordBox x:Name="PasswordtextBox" FontSize="13" Padding="31 9 0 9" Margin="0 5" GotFocus="PasswordTextBox_GotFocus" LostFocus="PasswordTextBox_LostFocus" />
 
                             <Icon:PackIconMaterial Kind="LockOutline" Width="15" 
-                                                   VerticalAlignment="Center" Margin="10 0 0 0"/>
+                                                   VerticalAlignment="Center" Margin="10 0 0 0"
+                                                   x:Name="PasswordIcon"/>
 
                         </Grid>
 

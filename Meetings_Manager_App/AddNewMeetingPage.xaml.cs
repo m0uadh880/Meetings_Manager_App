@@ -40,8 +40,8 @@ namespace Meetings_Manager_App
             this.meetings = meetings;
             ProjectNametextBox.Text = meetings.ProjectName;
             DatetextBox.Text = meetings.Date;
-            StartWithtextBox.Text = meetings.Time;
-            DurationtextBox.Text = meetings.Duration;
+            //StartWithtextBox.Text = meetings.Time;
+            //DurationtextBox.Text = meetings.Duration;
             DescriptiontextBox.Text = meetings.Description;
             selectedMails.Clear();
 
@@ -65,8 +65,8 @@ namespace Meetings_Manager_App
             {
                 meetings.ProjectName = ProjectNametextBox.Text;
                 meetings.Date = DatetextBox.Text;
-                meetings.Time = StartWithtextBox.Text;
-                meetings.Duration = DurationtextBox.Text;
+                //meetings.Time = StartWithtextBox.Text;
+                //meetings.Duration = DurationtextBox.Text;
                 meetings.Description = DescriptiontextBox.Text;
 
                 using (SQLiteConnection conn = new SQLiteConnection(App.MeetingsdatabasePath))
@@ -94,12 +94,12 @@ namespace Meetings_Manager_App
                 {
                     ProjectName = ProjectNametextBox.Text,
                     Date = DatetextBox.Text,
-                    Time = StartWithtextBox.Text,
-                    Duration = DurationtextBox.Text,
+                    Time = Time_combobox.Text + " " + AMorPM_combobox.Text,
+                    Duration = hoursIntegerUpDown.Text + "h and " + minutesIntegerUpDown.Text + "min",
                     Description = DescriptiontextBox.Text,
                 };
 
-                if (ProjectNametextBox.Text != "" && DatetextBox.Text != "" && StartWithtextBox.Text != "" && DurationtextBox.Text != "" && /*GueststextBox.Text != "" &&*/ DescriptiontextBox.Text != "")
+                if (ProjectNametextBox.Text != "" && DatetextBox.Text != "" && /*StartWithtextBox.Text != "" &&*/ /*DurationtextBox.Text != "" &&*/ /*GueststextBox.Text != "" &&*/ DescriptiontextBox.Text != "")
                 {
                     using (SQLiteConnection connection = new SQLiteConnection(App.MeetingsdatabasePath))
                     {
@@ -281,11 +281,5 @@ namespace Meetings_Manager_App
             var filtredList = accounts.Where(c => c.Email.ToLower().StartsWith(searchTextBox.Text.ToLower())).ToList();
             GuestsListView.ItemsSource = filtredList;
         }
-
-        private void GuestsTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            GuestsListView.ItemsSource = null;
-        }
     }
-
 }

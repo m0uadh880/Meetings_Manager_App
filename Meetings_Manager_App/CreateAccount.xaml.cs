@@ -17,6 +17,7 @@ namespace Meetings_Manager_App
             InitializeComponent();
             Loaded += MainWindow_Loaded;
             userAccount = new UserAccount();
+            ReadDataBase();
 
         }
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -39,11 +40,27 @@ namespace Meetings_Manager_App
             string username = UsernameTextBox.Text;
             string password = PasswordTextBox.Password;
             string confirmPassword = ConfirmPasswordTextBox.Password;
+            bool Emailtest = false;
+            bool Usernametest = false;
 
-            if(email != "" && username != "" && password != "" && confirmPassword != "" && confirmPassword == password) { 
-               if(accounts.Where(a => a.Email == email).Any())
+            foreach (var item in accounts)
+            {
+                if(item.Email == email)
                 {
-                    if(accounts.Where(a => a.Username == username).Any())
+                    Emailtest = true;
+                    break;
+                }
+                if (item.Username == username)
+                {
+                    Usernametest = true;
+                    break;
+                }
+            }
+
+            if (email != "" && username != "" && password != "" && confirmPassword != "" && confirmPassword == password) {
+                if (!Emailtest)
+                {
+                    if(!Usernametest)
                     {
                         userAccount.Email = email;
                         userAccount.Username = username;
@@ -72,7 +89,7 @@ namespace Meetings_Manager_App
             }
             else
             {
-                //
+                    System.Windows.MessageBox.Show("Please enter all the inputs", "Invalid Credentials", (MessageBoxButton)MessageBoxButtons.OK, (MessageBoxImage)MessageBoxIcon.Error);
             }
         }
     }

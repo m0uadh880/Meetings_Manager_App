@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
       xmlns:local="clr-namespace:Meetings_Manager_App"
       mc:Ignorable="d" 
@@ -78,36 +79,62 @@
                     <!--Time-->
                     <Grid Grid.Row="2" Margin="20 10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="250"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
 
                         <!--Start with-->
-                        <StackPanel Grid.Column="0" Margin="10" Width="150" HorizontalAlignment="Left">
+                        <StackPanel Grid.Column="0" Margin="10"  HorizontalAlignment="Left">
                             <TextBlock Text="Start with" FontSize="20" Margin="0 0 0 8"/>
-                            <Grid >
-                                <Grid.ColumnDefinitions>
+                            <Grid Margin="0 13 0 0">
+                                <Grid.ColumnDefinitions >
                                     <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
                                 <Icon:PackIconMaterial Kind="Clock" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                <TextBox  Grid.Column="1" x:Name="StartWithtextBox" Style="{StaticResource AddMeetingTextbox}"/>
+                                <!--<TextBox  Grid.Column="1" x:Name="StartWithtextBox" Style="{StaticResource AddMeetingTextbox}"/>-->
+                                <ComboBox x:Name="Time_combobox"  Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource TimePickerComboBox}">
+                                    <ComboBoxItem Content="1" IsSelected="True"/>
+                                    <ComboBoxItem Content="2"/>
+                                    <ComboBoxItem Content="3"/>
+                                    <ComboBoxItem Content="4"/>
+                                    <ComboBoxItem Content="5"/>
+                                    <ComboBoxItem Content="6"/>
+                                    <ComboBoxItem Content="7"/>
+                                    <ComboBoxItem Content="8"/>
+                                    <ComboBoxItem Content="9"/>
+                                    <ComboBoxItem Content="10"/>
+                                    <ComboBoxItem Content="11"/>
+                                    <ComboBoxItem Content="12"/>
+                                </ComboBox>
+                                <ComboBox x:Name="AMorPM_combobox" Margin="5" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource TimePickerComboBox}">
+                                    <ComboBoxItem Content="AM" IsSelected="True"/>
+                                    <ComboBoxItem Content="PM"/>
+                                </ComboBox>
                             </Grid>
                         </StackPanel>
 
                         <!--Duration-->
-                        <StackPanel Grid.Column="1" Margin="10" Width="150" HorizontalAlignment="Left">
+                        <StackPanel Grid.Column="1" Margin="10"  HorizontalAlignment="Left">
                             <TextBlock Text="Duration"  FontSize="20" Margin="0 0 0 8"/>
-                            <Grid >
-                                <Grid.ColumnDefinitions>
+                            <Grid Margin="0 13 0 0" >
+                                <Grid.ColumnDefinitions >
                                     <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
                                 <Icon:PackIconMaterial Kind="Clock" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                <TextBox  Grid.Column="1" x:Name="DurationtextBox" Style="{StaticResource AddMeetingTextbox}"/>
+                                <!--<TextBox  Grid.Column="1" x:Name="DurationtextBox" Style="{StaticResource AddMeetingTextbox}"/>-->
+                                <xctk:IntegerUpDown x:Name="hoursIntegerUpDown" Height="30" FontSize="20" Grid.Column="1" Minimum="0" Maximum="24"  Watermark="0" />
+                                <TextBlock Text="h" FontSize="20" Grid.Column="2" Margin="5"/>
+                                <xctk:IntegerUpDown x:Name="minutesIntegerUpDown" Height="30" FontSize="20" Grid.Column="3" Minimum="0" Maximum="60" Watermark="0"/>
+                                <TextBlock Text="min" FontSize="20" Grid.Column="4" Margin="5"/>
                             </Grid>
                         </StackPanel>
                     </Grid>
@@ -130,7 +157,6 @@
                                              HorizontalAlignment="Left"
                                              TextChanged="TextBox_TextChanged"
                                              GotFocus="GuestsTextBox_GotFocus"
-                                             LostFocus="GuestsTextBox_LostFocus"
                                              />
                                     <ListView x:Name="GuestsListView"
                                               SelectionChanged="GuestsListView_SelectionChanged"

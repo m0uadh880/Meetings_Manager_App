@@ -15,10 +15,7 @@ namespace Meetings_Manager_App
         public ShowGuests(List<UserMeeting> userMeeting)
         {
             InitializeComponent();
-            GuestsListView.ItemsSource = userMeeting.Select(item => new
-            {
-                Email = item.Email,
-            });
+            GuestsDataGrid.ItemsSource = userMeeting;
         }
 
         public void SetMainFrame(Frame frame)
